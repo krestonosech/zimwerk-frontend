@@ -2,23 +2,31 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint --ext .js,.ts,.vue src",
+    "vite:dev": "vite",
+    "vite:build": "vite build",
+    "format:check": "prettier --check src/",
+    "format:fix": "prettier --write src/",
+    "lint:check": "eslint . --ignore-path .gitignore --max-warnings 0",
+    "lint:fix": "eslint . --fix --ignore-path .gitignore --max-warnings 0",
+    "type-check": "vue-tsc --build --force",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,ts,vue}": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
+    "src/**/*.{js,ts,vue}": [
+      "npm run format:fix",
+      "npm run lint:fix"
     ]
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^3.4.1",
     "axios": "^1.9.0",
     "core-js": "^3.8.3",
+    "pinia": "^3.0.2",
     "qs": "^6.14.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
@@ -35,6 +43,8 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-vue": "^8.0.3",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.1",

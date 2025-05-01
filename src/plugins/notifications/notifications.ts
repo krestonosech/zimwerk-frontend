@@ -1,10 +1,6 @@
-import {
-  default as NotificationsPlugin,
-  Notifications,
-  notify,
-} from "@kyvg/vue3-notification";
+import { default as NotificationsPlugin, Notifications, notify } from '@kyvg/vue3-notification';
 
-import type { NotificationOptions } from "./types";
+import type { NotificationOptions } from './types';
 
 export function showNotification(options: NotificationOptions) {
   notify(options);
@@ -16,7 +12,7 @@ export function closeNotification(id: number) {
 
 export function showNotificationLoading(text: string): number {
   const id = Date.now();
-  notify({ id, text, type: "loading", duration: -1 });
+  notify({ id, text, type: 'loading', duration: -1 });
   return id;
 }
 
