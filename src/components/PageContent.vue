@@ -12,6 +12,6 @@
     flex-direction: column;
     //TODO поменять размер при необходимости
     gap: 100px;
-    padding-top: 32px;
+    padding: 32px 0;
   }
 </style>

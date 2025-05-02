@@ -1,13 +1,8 @@
 <template>
   <PageContent>
-    <div class="events">
-      <p class="events__title">События</p>
-      <Chips :buttons="EVENTS_BUTTONS" />
-      <List />
-    </div>
-    <div class="events">
-      <p class="events__title">Архив</p>
-      <Chips :buttons="EVENTS_BUTTONS" />
+    <div class="excursions">
+      <p class="excursions__title">Экскурсии</p>
+      <Chips :buttons="EXCURSIONS_BUTTONS" />
       <List />
     </div>
   </PageContent>
@@ -17,11 +12,11 @@
   import { PageContent } from '@/components';
   import { Chips } from '@/components/ui/chips';
   import { List } from '@/components/ui/list';
-  import { EVENTS_BUTTONS } from '@/entities/consts';
+  import { EXCURSIONS_BUTTONS } from '@/entities/consts';
 </script>
 
 <style lang="scss" scoped>
-  .events {
+  .excursions {
     display: flex;
     flex-direction: column;
     gap: 20px;

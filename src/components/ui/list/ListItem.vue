@@ -1,9 +1,11 @@
 <template>
-  <div class="list-item">
+  <div
+    class="list-item"
+    :class="{ 'list-item__border-none': isLastElement }"
+  >
     <div class="list-item__text">{{ props.name }}</div>
     <div class="list-item__date">{{ props.date }}</div>
     <div class="list-item__description">{{ props.description }}</div>
-    <div :class="{ border_none: isLastElement }"></div>
   </div>
 </template>
 
@@ -49,8 +51,8 @@
       font-size: 20px;
       line-height: 24px;
     }
-  }
-  .border_none {
-    border: none;
+    &__border-none {
+      border: none !important;
+    }
   }
 </style>

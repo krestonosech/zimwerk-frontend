@@ -25,7 +25,7 @@
   const buttons: { label: string; id: Filters['page'] }[] = [
     { label: 'О МУЗЕЕ', id: 'about-museum' },
     { label: 'ЭКТОЗООСАД', id: 'etnozoo' },
-    { label: 'ЭКСКУРСИИ', id: 'excursion' },
+    { label: 'ЭКСКУРСИИ', id: 'excursions' },
     { label: 'СОБЫТИЯ', id: 'events' },
     { label: '8(3012) 33-25-10', id: 'phone-number' },
   ];
