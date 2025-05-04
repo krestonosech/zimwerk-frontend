@@ -2,8 +2,16 @@
   <PageContent>
     <div class="excursions">
       <p class="excursions__title">Экскурсии</p>
-      <Chips :buttons="EXCURSIONS_BUTTONS" />
-      <List />
+      <Chips />
+      <List
+        v-if="items?.length"
+        :items="items"
+        excursions
+        class="excursions__list"
+      />
+      <div v-else>
+        <p class="events__p">Нет подходящих экскурсий</p>
+      </div>
     </div>
   </PageContent>
 </template>
@@ -12,7 +20,16 @@
   import { PageContent } from '@/components';
   import { Chips } from '@/components/ui/chips';
   import { List } from '@/components/ui/list';
-  import { EXCURSIONS_BUTTONS } from '@/entities/consts';
+  import { ListItemProps } from '@/components/ui/list/types';
+  import { useExcursionsStore } from '@/entities/excursions/model';
+  import { computed, onMounted } from 'vue';
+
+  const excursionsStore = useExcursionsStore();
+  const items = computed<ListItemProps[] | undefined>(() => excursionsStore.excursions.excursions);
+
+  onMounted(async () => {
+    await excursionsStore.fetchAllExcursions('Все');
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -26,6 +43,20 @@
       font-size: 64px;
       line-height: 72px;
       letter-spacing: 0%;
+    }
+    &__p {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0%;
+    }
+  }
+  @media (max-width: 750px) {
+    .excursions {
+      &__title {
+        font-size: 40px;
+      }
     }
   }
 </style>

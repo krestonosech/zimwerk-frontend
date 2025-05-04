@@ -7,7 +7,7 @@
       v-for="(item, index) in items"
       :key="index"
       class="image__element"
-      style="border-top: solid #bababa 1px"
+      style="border-top: solid #bababa 1px; margin-bottom: 30px"
     >
       <p
         v-if="!item.name_2"
@@ -63,10 +63,13 @@
   .image {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    flex-wrap: wrap;
     &__element {
       display: flex;
       flex-direction: column;
+      &__padding {
+        padding-top: 10px;
+      }
     }
     &__text {
       font-family: Roboto;
@@ -76,7 +79,30 @@
       letter-spacing: 0%;
     }
     &__image {
-      width: 450px;
+      width: 447px;
+      height: 330px;
+    }
+  }
+  @media (max-width: 1440px) {
+    .image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__image {
+        padding: 16px;
+      }
+    }
+  }
+  @media (max-width: 750px) {
+    .image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &__image {
+        width: 300px;
+        height: 200px;
+        padding: 16px;
+      }
     }
   }
 </style>

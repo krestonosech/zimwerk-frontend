@@ -1,19 +1,49 @@
-import { axios, type Response } from '@/plugins/axios';
+import { axios } from '@/plugins/axios';
+import { showNotification } from '@/plugins/notifications';
 
-export async function authUser(params: { login: string; password: string }) {
+export async function requests() {
   try {
-    const response = await axios.post<Response<null>>('/api/v1/auth/login', params, {
-      errorMessage: 'Ошибка получения авторизации!',
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
+    const response = await axios.post('/requests', {}, config);
+
+    return response.data;
+  } catch (err) {
+    showNotification({
+      text: 'Не удалось авторизироваться',
+      type: 'error',
     });
+  }
+}
 
-    return response.data.data;
-  } catch (error) {
-    let errorMessage = 'Ошибка при авторизации.';
+export async function authUser(params: { email: string; password: string }) {
+  try {
+    const response = await axios.post('/auth', params);
+    return response.data;
+  } catch (err) {
+    showNotification({
+      text: 'Не удалось авторизироваться',
+      type: 'error',
+    });
+  }
+}
 
-    if (axios.isAxiosError<{ error: { msg: string } }>(error) && error.response?.data?.error?.msg) {
-      errorMessage = error.response.data.error.msg;
-    }
-
-    throw new Error(errorMessage);
+export async function me() {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    };
+    const response = await axios.post('/me', {}, config);
+    return response.data;
+  } catch (err) {
+    showNotification({
+      text: 'Не удалось авторизироваться',
+      type: 'error',
+    });
   }
 }

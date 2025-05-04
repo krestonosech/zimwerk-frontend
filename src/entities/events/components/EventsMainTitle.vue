@@ -3,7 +3,12 @@
     <div class="main-title__block">
       <p class="main-title__text">Ближайшие события</p>
       <div class="main-title__button">
-        <Button transparent>КО ВСЕМ СОБЫТИЯМ</Button>
+        <Button
+          transparent
+          @click="router.push('/events')"
+        >
+          КО ВСЕМ СОБЫТИЯМ
+        </Button>
       </div>
     </div>
   </div>
@@ -11,6 +16,7 @@
 
 <script setup lang="ts">
   import { Button } from '@/components/ui/button';
+  import { router } from '@/router';
 </script>
 
 <style lang="scss" scoped>
@@ -31,6 +37,12 @@
     &__button {
       display: flex;
       align-items: end;
+    }
+  }
+  @media (max-width: 750px) {
+    .main-title__text {
+      font-size: 24px;
+      line-height: 32px;
     }
   }
 </style>

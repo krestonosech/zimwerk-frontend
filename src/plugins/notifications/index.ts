@@ -1,1 +1,2 @@
-export { showNotification, NotificationsPlugin } from './notifications';
+export * from './notifications';
+export * from './types';

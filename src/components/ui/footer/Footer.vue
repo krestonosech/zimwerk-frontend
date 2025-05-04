@@ -70,4 +70,14 @@
       text-transform: uppercase;
     }
   }
+  @media (max-width: 750px) {
+    .footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      height: initial;
+    }
+  }
 </style>

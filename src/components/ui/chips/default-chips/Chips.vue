@@ -2,10 +2,10 @@
   <div class="chips">
     <div class="chips__buttons">
       <ChipButton
-        v-for="(item, index) in buttons"
+        v-for="(item, index) in EXCURSIONS_BUTTONS"
         :key="index"
         :is-active="selected === item"
-        @click="selected = item"
+        @click="changeFilter(item)"
       >
         {{ item }}
       </ChipButton>
@@ -15,19 +15,27 @@
       type="text"
       class="chips__input"
       placeholder="Поиск"
+      @keyup.enter="changeFilter(selected)"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref, defineProps } from 'vue';
+  import { ref } from 'vue';
+  import { EXCURSIONS_BUTTONS } from '@/entities/consts';
   import ChipButton from './ChipButton.vue';
+  import { useExcursionsStore } from '@/entities/excursions/model';
 
+  const excursionsStore = useExcursionsStore();
   const selected = ref('Все');
   const search = ref<string>('');
-  defineProps<{
-    buttons: string[];
-  }>();
+
+  async function changeFilter(item?: string) {
+    if (item) {
+      selected.value = item;
+    }
+    excursionsStore.fetchAllExcursions(selected.value, search.value);
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +56,18 @@
       padding-left: 10px;
       border-radius: 8px;
       border-width: 1px;
+    }
+  }
+  @media (max-width: 750px) {
+    .chips {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      &__buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
     }
   }
 </style>

@@ -16,14 +16,6 @@
 
 @font-face {
   font-family: 'AA Stetica';
-  src: url('@/assets/fonts/AA Stetica Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'AA Stetica';
   src: url('@/assets/fonts/AA Stetica Black_0.otf') format('opentype');
   font-weight: 900;
   font-style: normal;

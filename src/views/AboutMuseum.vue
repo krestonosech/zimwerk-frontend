@@ -36,9 +36,9 @@
     THIRD_TEXT_1,
     THIRD_TEXT_2,
   } from '@/entities/consts';
-  import director from '@/assets/about-museum-images/director.svg';
-  import zam from '@/assets/about-museum-images/zam.svg';
-  import savior from '@/assets/about-museum-images/savior.svg';
+  import director from '@/assets/about-museum-images/director.webp';
+  import zam from '@/assets/about-museum-images/zam.webp';
+  import savior from '@/assets/about-museum-images/savior.webp';
   import { Images } from '@/components/ui/images';
 
   const items = [
@@ -105,6 +105,14 @@
         font-weight: 500;
         font-size: 20px;
         line-height: 24px;
+      }
+    }
+  }
+
+  @media (max-width: 750px) {
+    .about-museum {
+      &__title {
+        font-size: 40px;
       }
     }
   }

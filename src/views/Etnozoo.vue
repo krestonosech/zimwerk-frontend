@@ -13,9 +13,16 @@
 <script lang="ts" setup>
   import { PageContent } from '@/components';
   import { Images } from '@/components/ui/images';
+  import { useEtnozooStore } from '@/entities/etnozoo/model';
   import { ImagesProps } from '@/entities/filters/types';
-  import { ref } from 'vue';
-  const items = ref<ImagesProps[]>();
+  import { computed, onMounted } from 'vue';
+
+  const eventsStore = useEtnozooStore();
+  const items = computed<ImagesProps[] | undefined>(() => eventsStore.etnozoo.etnozoo);
+
+  onMounted(async () => {
+    await eventsStore.fetchAllEtnozoo();
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +36,11 @@
       font-size: 64px;
       line-height: 72px;
       letter-spacing: 0%;
+    }
+  }
+  @media (max-width: 750px) {
+    .etnozoo__title {
+      font-size: 42px;
     }
   }
 </style>
