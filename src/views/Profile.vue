@@ -8,7 +8,11 @@
           <p class="profile__info__email">{{ userStore.user.email }}</p>
         </div>
       </div>
-      <MainPageTable :items="myRequests" />
+      <MainPageTable
+        v-if="myRequests.length !== 0"
+        :items="myRequests"
+      />
+      <p v-else>Вы пока не купили ни один билет!</p>
     </div>
   </PageContent>
 </template>

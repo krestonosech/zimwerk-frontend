@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^3.4.1",
+    "@vuepic/vue-datepicker": "^11.0.2",
     "axios": "^1.9.0",
     "core-js": "^3.8.3",
     "pinia": "^3.0.2",

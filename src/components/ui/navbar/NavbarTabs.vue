@@ -1,7 +1,18 @@
 <template>
   <div class="button-group">
+    <RouterLink
+      v-for="(item, index) in allButtons"
+      :key="index"
+      :to="`/${item.id}`"
+      class="button-group__button"
+      :class="{
+        'button-group__button': filterStore.page !== item.id,
+      }"
+      @click="filterStore.page = item.id"
+    >
+      <p :class="{ 'button-group__isActive': filterStore.page === item.id }">{{ item.label }}</p>
+    </RouterLink>
     <div
-      v-if="userStore.user.username"
       class="button-group__profile-wrapper"
       @mouseenter="isShowProfile = true"
       @mouseleave="isShowProfile = false"
@@ -9,7 +20,7 @@
       <p class="button-group__button">ЛИЧНЫЙ КАБИНЕТ</p>
       <Transition name="dropdown">
         <div
-          v-if="isShowProfile"
+          v-if="isShowProfile && userStore.user.username"
           class="profile-dropdown"
         >
           <RouterLink
@@ -34,23 +45,52 @@
           </div>
         </div>
       </Transition>
-    </div>
-    <RouterLink
-      v-for="(item, index) in allButtons"
-      :key="index"
-      :to="`/${item.id}`"
-      class="button-group__button"
-      :class="{
-        'button-group__button': filterStore.page !== item.id,
-      }"
-      @click="filterStore.page = item.id"
-    >
-      <p :class="{ 'button-group__isActive': filterStore.page === item.id }">{{ item.label }}</p>
-    </RouterLink>
-    <div class="button-group__button">
-      <p>8(3012) 33-25-10</p>
+      <Transition name="dropdown">
+        <div
+          v-if="isShowProfile && !userStore.user.username"
+          class="profile-dropdown"
+        >
+          <div
+            v-if="!userStore.user.isAdmin"
+            class="profile-dropdown__item"
+            style="text-decoration: none"
+            @click="
+              isRegisterOpen = true;
+              isRegister = false;
+              isApply = !isApply;
+            "
+          >
+            Авторизация
+          </div>
+          <div
+            v-if="!userStore.user.isAdmin"
+            class="profile-dropdown__item"
+            style="text-decoration: none"
+            @click="
+              isRegisterOpen = true;
+              isRegister = true;
+              isApply = !isApply;
+            "
+          >
+            Регистрация
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
+  <Modal
+    v-model:open="isRegisterOpen"
+    :apply-button="`${isRegister ? 'Зарегистрироваться' : 'Войти'}`"
+    title="Личный кабинет"
+    @close="closeModal"
+    @apply="apply"
+  >
+    <Register
+      v-model:is-register="isRegister"
+      v-model:is-apply="isApply"
+      @success="isRegisterOpen = false"
+    />
+  </Modal>
 </template>
 
 <script lang="ts" setup>
@@ -59,9 +99,14 @@
   import { useUserStore } from '@/entities/user';
   import { router } from '@/router';
   import { computed, onMounted, ref } from 'vue';
+  import { Modal } from '../modal';
+  import { Register } from '@/components';
 
   const filterStore = useFiltersStore();
   const userStore = useUserStore();
+  const isRegisterOpen = ref<boolean>(false);
+  const isRegister = ref<boolean>(true);
+  const isApply = ref<boolean>(false);
   const isShowProfile = ref(false);
 
   onMounted(() => {
@@ -84,8 +129,20 @@
 
   function logout() {
     localStorage.removeItem('token');
-    location.reload();
+    userStore.user.email = '';
+    userStore.user.requests = [];
+    userStore.user.username = '';
+    userStore.user.id = 0;
     router.push('/main');
+    location.reload();
+  }
+
+  function closeModal() {
+    isRegisterOpen.value = false;
+  }
+
+  function apply() {
+    isApply.value = !isApply.value;
   }
 </script>
 <style lang="scss" scoped>

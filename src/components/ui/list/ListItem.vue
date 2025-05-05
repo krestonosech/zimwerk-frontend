@@ -1,7 +1,11 @@
 <template>
   <div
     class="list-item"
-    :class="{ 'list-item__border-none': isLastElement, 'list-item__cursor': !isExcirsions }"
+    :class="{
+      'list-item__border-none': isLastElement,
+      'list-item__cursor': !isExcirsions,
+      'list-item_hover': !isExcirsions,
+    }"
     @click="emit('click')"
   >
     <div class="list-item__text">{{ props.name }}</div>
@@ -86,6 +90,10 @@
     &__border-none {
       border: none !important;
     }
+  }
+  .list-item_hover:hover {
+    background-color: #f8f8f8;
+    transition: 0.3s ease;
   }
   @media (max-width: 750px) {
     .list-item {

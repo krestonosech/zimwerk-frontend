@@ -27,8 +27,11 @@
         class="register__input"
         placeholder="Описание"
       />
-      <datepicker
-        v-model="picked"
+      <VueDatePicker
+        v-model="date"
+        multi-calendars
+        range
+        :time-picker="false"
         class="register__input"
       />
     </div>
@@ -37,18 +40,26 @@
 
 <script lang="ts" setup>
   import Modal from './ui/modal/Modal.vue';
-  import Datepicker from 'vue3-datepicker';
-  import { defineModel, ref, defineEmits } from 'vue';
+  import VueDatePicker from '@vuepic/vue-datepicker';
+  import '@vuepic/vue-datepicker/dist/main.css';
+  import { defineModel, ref, defineEmits, onMounted } from 'vue';
   import { axios } from '@/plugins/axios';
   import { showNotification } from '@/plugins/notifications';
+  import { useEventsStore } from '@/entities/events/model';
 
+  const eventStore = useEventsStore();
   const isModalAddingOpen = defineModel<boolean>('isModalAddingOpen', { required: true });
-
   const emit = defineEmits(['close']);
   const typePublish = ref('');
   const name = ref('');
   const type = ref('');
-  const picked = ref(new Date());
+  const date = ref();
+
+  onMounted(() => {
+    const startDate = new Date();
+    const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+    date.value = [startDate, endDate];
+  });
   const description = ref('');
 
   function formatTodayMonthWithDay() {
@@ -66,10 +77,31 @@
       'ноября',
       'декабря',
     ];
-    const today = picked.value;
-    const monthName = months[today.getMonth()];
-    const day = today.getDate();
-    return `${day} ${monthName}`;
+
+    if (Array.isArray(date.value) && date.value.length === 2 && date.value[0] && date.value[1]) {
+      const [start, end] = date.value;
+      const startDay = start.getDate();
+      const startMonth = months[start.getMonth()];
+      const endDay = end.getDate();
+      const endMonth = months[end.getMonth()];
+
+      if (
+        start.getDate() === end.getDate() &&
+        start.getMonth() === end.getMonth() &&
+        start.getFullYear() === end.getFullYear()
+      ) {
+        return `${startDay} ${startMonth}`;
+      } else if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+        return `${startDay} - ${endDay} ${startMonth}`;
+      } else {
+        return `${startDay} ${startMonth} - ${endDay} ${endMonth}`;
+      }
+    } else if (date.value instanceof Date) {
+      const day = date.value.getDate();
+      const monthName = months[date.value.getMonth()];
+      return `${day} ${monthName}`;
+    }
+    return '';
   }
 
   function closeModal() {
@@ -93,6 +125,8 @@
       };
 
       await axios.post('/add-publish', data, config);
+      await eventStore.fetchAllEvents();
+      await eventStore.fetchAllArchiveEvents();
       closeModal();
       showNotification({
         text: 'Публикация создана!',
