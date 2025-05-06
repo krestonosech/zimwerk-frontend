@@ -1,0 +1,61 @@
+<template>
+  <p
+    class="m-title"
+    :class="{
+      'xl-title': xl,
+      'm-title': m,
+      'xs-title': xs,
+    }"
+  >
+    {{ text }}
+  </p>
+</template>
+
+<script lang="ts" setup>
+  import { defineProps } from 'vue';
+
+  defineProps<{
+    xl?: boolean;
+    m?: boolean;
+    xs?: boolean;
+    text: string;
+  }>();
+</script>
+
+<style lang="scss" scoped>
+  .m-title {
+    font-family: 'AA Stetica';
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+  }
+
+  .xl-title {
+    font-family: 'AA Stetica';
+    font-weight: 400;
+    font-size: 118px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    padding-bottom: 20px;
+    border-bottom: solid black 2px;
+  }
+
+  .xs-title {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  @media (max-width: 1440px) {
+    .xl__title {
+      font-size: 62px;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .xl__title .m-title {
+      font-size: 40px;
+    }
+  }
+</style>

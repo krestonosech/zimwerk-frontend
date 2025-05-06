@@ -10,7 +10,9 @@
       }"
       @click="filterStore.page = item.id"
     >
-      <p :class="{ 'button-group__isActive': filterStore.page === item.id }">{{ item.label }}</p>
+      <p :class="{ 'button-group__isActive': router.currentRoute.value.name === item.id }">
+        {{ item.label }}
+      </p>
     </RouterLink>
     <div
       class="button-group__profile-wrapper"
@@ -18,79 +20,9 @@
       @mouseleave="isShowProfile = false"
     >
       <p class="button-group__button">ЛИЧНЫЙ КАБИНЕТ</p>
-      <Transition name="dropdown">
-        <div
-          v-if="isShowProfile && userStore.user.username"
-          class="profile-dropdown"
-        >
-          <RouterLink
-            v-if="!userStore.user.isAdmin"
-            :to="'/profile'"
-            class="profile-dropdown__item"
-            style="text-decoration: none"
-          >
-            {{ userStore.user.username }}
-          </RouterLink>
-          <p
-            v-if="!userStore.user.isAdmin"
-            style="padding: 10px 20px"
-          >
-            {{ userStore.user.email }}
-          </p>
-          <div
-            class="profile-dropdown__item"
-            @click="logout"
-          >
-            Выйти
-          </div>
-        </div>
-      </Transition>
-      <Transition name="dropdown">
-        <div
-          v-if="isShowProfile && !userStore.user.username"
-          class="profile-dropdown"
-        >
-          <div
-            v-if="!userStore.user.isAdmin"
-            class="profile-dropdown__item"
-            style="text-decoration: none"
-            @click="
-              isRegisterOpen = true;
-              isRegister = false;
-              isApply = !isApply;
-            "
-          >
-            Авторизация
-          </div>
-          <div
-            v-if="!userStore.user.isAdmin"
-            class="profile-dropdown__item"
-            style="text-decoration: none"
-            @click="
-              isRegisterOpen = true;
-              isRegister = true;
-              isApply = !isApply;
-            "
-          >
-            Регистрация
-          </div>
-        </div>
-      </Transition>
+      <NavbarDropdown :is-show-profile="isShowProfile" />
     </div>
   </div>
-  <Modal
-    v-model:open="isRegisterOpen"
-    :apply-button="`${isRegister ? 'Зарегистрироваться' : 'Войти'}`"
-    title="Личный кабинет"
-    @close="closeModal"
-    @apply="apply"
-  >
-    <Register
-      v-model:is-register="isRegister"
-      v-model:is-apply="isApply"
-      @success="isRegisterOpen = false"
-    />
-  </Modal>
 </template>
 
 <script lang="ts" setup>
@@ -99,14 +31,10 @@
   import { useUserStore } from '@/entities/user';
   import { router } from '@/router';
   import { computed, onMounted, ref } from 'vue';
-  import { Modal } from '../modal';
-  import { Register } from '@/components';
+  import NavbarDropdown from './NavbarDropdown.vue';
 
   const filterStore = useFiltersStore();
   const userStore = useUserStore();
-  const isRegisterOpen = ref<boolean>(false);
-  const isRegister = ref<boolean>(true);
-  const isApply = ref<boolean>(false);
   const isShowProfile = ref(false);
 
   onMounted(() => {
@@ -118,6 +46,7 @@
     { label: 'ЭТНОЗООСАД', id: 'etnozoo' },
     { label: 'ЭКСКУРСИИ', id: 'excursions' },
     { label: 'СОБЫТИЯ', id: 'events' },
+    { label: 'НОВОСТИ', id: 'news' },
   ];
 
   const allButtons = computed<{ label: string; id: Filters['page'] }[]>(() => {
@@ -126,24 +55,6 @@
     }
     return buttons;
   });
-
-  function logout() {
-    localStorage.removeItem('token');
-    userStore.user.email = '';
-    userStore.user.requests = [];
-    userStore.user.username = '';
-    userStore.user.id = 0;
-    router.push('/main');
-    location.reload();
-  }
-
-  function closeModal() {
-    isRegisterOpen.value = false;
-  }
-
-  function apply() {
-    isApply.value = !isApply.value;
-  }
 </script>
 <style lang="scss" scoped>
   .button-group {
@@ -171,48 +82,6 @@
     }
   }
 
-  .arrow-down {
-    margin-left: 6px;
-    font-size: 12px;
-  }
-
-  .profile-dropdown {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    min-width: 160px;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    border-radius: 8px;
-    z-index: 100;
-    padding: 8px 0;
-    display: flex;
-    flex-direction: column;
-
-    &__item {
-      padding: 10px 20px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-      &:hover {
-        background: #f5f5f5;
-      }
-    }
-  }
-
-  .dropdown-enter-active,
-  .dropdown-leave-active {
-    transition: opacity 0.2s;
-  }
-  .dropdown-enter-from,
-  .dropdown-leave-to {
-    opacity: 0;
-  }
-  .dropdown-enter-to,
-  .dropdown-leave-from {
-    opacity: 1;
-  }
   @media (max-width: 750px) {
     .button-group {
       display: flex;

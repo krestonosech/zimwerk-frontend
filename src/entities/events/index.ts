@@ -1,3 +1,3 @@
-import EventsMainTitle from './components/EventsMainTitle.vue';
-
-export { EventsMainTitle };
+export * from './api';
+export * from './components';
+export * from './model';

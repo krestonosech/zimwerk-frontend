@@ -1,7 +1,7 @@
 <template>
   <PageContent>
     <div class="about-museum">
-      <p class="about-museum__title">О Музее</p>
+      <Title text="О Музее" />
       <div class="about-museum__list">
         <div
           v-for="(item, index) in items"
@@ -19,14 +19,17 @@
       </div>
     </div>
     <div class="about-museum">
-      <p class="about-museum__title">Руководство</p>
-      <Images :items="images" />
+      <Title text="Руководство" />
+      <Images
+        :items="images"
+        type="museum-images"
+      />
     </div>
   </PageContent>
 </template>
 
 <script lang="ts" setup>
-  import { PageContent } from '@/components';
+  import { PageContent, Title } from '@/components';
   import {
     FIFTH_TEXT,
     FIRST_TEXT,
@@ -36,9 +39,6 @@
     THIRD_TEXT_1,
     THIRD_TEXT_2,
   } from '@/entities/consts';
-  import director from '@/assets/about-museum-images/director.webp';
-  import zam from '@/assets/about-museum-images/zam.webp';
-  import savior from '@/assets/about-museum-images/savior.webp';
   import { Images } from '@/components/ui/images';
 
   const items = [
@@ -58,19 +58,19 @@
       id: 1,
       name: 'Директор',
       name_2: 'Маладаев Алексей Анатольевич',
-      url: director,
+      url: 'director.webp',
     },
     {
       id: 2,
       name: 'Заместитель директора по науке',
       name_2: 'Бильдуева Саяна Викторовна',
-      url: zam,
+      url: 'zam.webp',
     },
     {
       id: 3,
       name: 'Главный хранитель',
       name_2: 'Чойбсонова Валентина Ринчиновна',
-      url: savior,
+      url: 'savior.webp',
     },
   ];
 </script>
@@ -80,13 +80,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    &__title {
-      font-family: AA Stetica;
-      font-weight: 400;
-      font-size: 64px;
-      line-height: 72px;
-      letter-spacing: 0%;
-    }
     &__element {
       display: flex;
       justify-content: space-between;

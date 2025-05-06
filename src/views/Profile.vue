@@ -2,7 +2,7 @@
   <PageContent>
     <div class="profile">
       <div class="profile__header">
-        <p class="profile__title">Личный кабинет</p>
+        <Title text="Личный кабинет" />
         <div class="profile__info">
           <p class="profile__info__username">{{ userStore.user.username }}</p>
           <p class="profile__info__email">{{ userStore.user.email }}</p>
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { PageContent } from '@/components';
-  import { MainPageTable } from '@/entities/main-page';
+  import { PageContent, Title } from '@/components';
+  import { MainPageTable } from '@/entities/main';
   import { useUserStore } from '@/entities/user';
   import { computed, onMounted } from 'vue';
 
@@ -40,14 +40,6 @@
       display: flex;
       gap: 10px;
       padding: 10px 0;
-    }
-    &__title {
-      font-family: 'AA Stetica';
-      font-weight: 400;
-      font-size: 118px;
-      line-height: 100%;
-      letter-spacing: 0%;
-      padding-bottom: 20px;
     }
     &__info {
       display: flex;

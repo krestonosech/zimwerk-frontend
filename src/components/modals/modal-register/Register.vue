@@ -70,7 +70,7 @@
 
 <script lang="ts" setup>
   import { ref, defineModel, watch, defineEmits } from 'vue';
-  import { Button } from './ui/button';
+  import { Button } from '../../ui/button';
   import { showNotification } from '@/plugins/notifications';
   import { router } from '@/router';
   import { axios } from '@/plugins/axios';

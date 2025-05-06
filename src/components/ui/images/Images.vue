@@ -27,10 +27,10 @@
           {{ item.name_2 }}
         </p>
       </div>
-      <img
-        :src="item.url"
-        :alt="item.name"
-        class="image__image"
+      <Image
+        :url="item.url"
+        :name="item.name"
+        :type="type"
       />
     </div>
   </div>
@@ -43,10 +43,10 @@
       :key="index"
       class="image__element"
     >
-      <img
-        :src="item.url"
-        :alt="item.name"
-        class="image__image"
+      <Image
+        :url="item.url"
+        :name="item.name"
+        :type="type"
       />
     </div>
   </div>
@@ -55,8 +55,13 @@
 <script lang="ts" setup>
   import { ImagesProps } from '@/entities/filters/types';
   import { defineProps } from 'vue';
+  import Image from './Image.vue';
 
-  defineProps<{ items: ImagesProps[]; onlyImages?: boolean }>();
+  defineProps<{
+    items: ImagesProps[];
+    onlyImages?: boolean;
+    type: 'main-images' | 'museum-images' | 'etnozoo-images';
+  }>();
 </script>
 
 <style lang="scss" scoped>

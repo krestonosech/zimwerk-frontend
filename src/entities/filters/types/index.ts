@@ -1,5 +1,12 @@
 export interface Filters {
-  page: 'main-page' | 'about-museum' | 'etnozoo' | 'excursions' | 'events' | 'phone-number';
+  page:
+    | 'main-page'
+    | 'about-museum'
+    | 'etnozoo'
+    | 'excursions'
+    | 'events'
+    | 'phone-number'
+    | 'news';
 }
 
 export interface ImagesProps {

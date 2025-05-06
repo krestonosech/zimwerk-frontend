@@ -1,3 +1,3 @@
-import Chips from './default-chips/Chips.vue';
-
-export { Chips };
+export * from './archive-chips';
+export * from './default-chips';
+export * from './events-chips';

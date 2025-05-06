@@ -41,6 +41,18 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/Profile.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/news',
+    name: 'news',
+    component: () => import('../views/News.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/news/:id',
+    name: 'news-item',
+    component: () => import('../views/NewsItemPage.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({

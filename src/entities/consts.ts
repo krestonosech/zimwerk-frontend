@@ -29,3 +29,162 @@ export const FOURTH_TEXT =
 export const FIFTH_TEXT = 'Открытие живого уголка музея';
 export const SIXTH_TEXT =
   'Этнографический музей народов Забайкалья занимает важное место в культурном пространстве Бурятии. Он является хранителем культуры края, местом встречи и взаимообогащения ушедших и современных культур, где каждый посетитель сможет не только окунуться в атмосферу прошлого, но и попробовать свои силы в национальных видах спорта, принять участие в анимационных экскурсиях, просто провести отдых с семьей на свежем воздухе. Музей становится уникальным по своей универсальности и общедоступности узлом культурных коммуникаций с должным уровнем предоставления музейных услуг';
+
+export const images = [
+  {
+    id: 1,
+    name: '«Ночь Ивана Купалы -2023»',
+    url: 'first-funfair.webp',
+  },
+  {
+    id: 2,
+    name: '«Радужные гномы. Цветные истории»',
+    url: 'second-funfair.webp',
+  },
+  {
+    id: 3,
+    name: 'Лесные байки – 2023',
+    url: 'third-funfair.webp',
+  },
+];
+
+export const animals = [
+  {
+    id: 1,
+    name: 'Лиса',
+    url: 'fox.webp',
+  },
+  {
+    id: 2,
+    name: 'Рысь',
+    url: 'lynx.webp',
+  },
+  {
+    id: 3,
+    name: 'Енот',
+    url: 'raccoon.webp',
+  },
+];
+
+export const etnozooImages = [
+  {
+    id: 1,
+    name: 'Степной орел',
+    url: 'eagle.webp',
+  },
+  {
+    id: 2,
+    name: 'Красный волк',
+    url: 'fox.webp',
+  },
+  {
+    id: 3,
+    name: 'Кролики',
+    url: 'rabbits.webp',
+  },
+  {
+    id: 4,
+    name: 'Домашняя лошадь',
+    url: 'horse.webp',
+  },
+  {
+    id: 5,
+    name: 'Индийские бегунки',
+    url: 'runners.webp',
+  },
+  {
+    id: 6,
+    name: 'Орлан белохвост',
+    url: 'eagle1.webp',
+  },
+  {
+    id: 7,
+    name: 'Свинья Венгерская Мангалица',
+    url: 'pig.webp',
+  },
+  {
+    id: 8,
+    name: 'Медведь',
+    url: 'bear.webp',
+  },
+  {
+    id: 9,
+    name: 'Филин обыкновенный',
+    url: 'owl.webp',
+  },
+  {
+    id: 10,
+    name: 'Белая сова',
+    url: 'white-owl.webp',
+  },
+  {
+    id: 11,
+    name: 'Рысь',
+    url: 'lynx1.webp',
+  },
+  {
+    id: 12,
+    name: 'Волк',
+    url: 'wolf.webp',
+  },
+  {
+    id: 13,
+    name: 'Енот',
+    url: 'raccoon.webp',
+  },
+  {
+    id: 14,
+    name: 'Белка обыкновенная',
+    url: 'squirel.webp',
+  },
+  {
+    id: 15,
+    name: 'Косуля Сибирская',
+    url: 'roe.webp',
+  },
+  {
+    id: 16,
+    name: 'Овца',
+    url: 'sheep.webp',
+  },
+  {
+    id: 17,
+    name: 'Пятнистый олень',
+    url: 'deer.webp',
+  },
+  {
+    id: 18,
+    name: 'Енотовидная собака',
+    url: 'raccoun-dog.webp',
+  },
+  {
+    id: 19,
+    name: 'Лось',
+    url: 'elk.webp',
+  },
+  {
+    id: 20,
+    name: 'Лисица обыкновенная',
+    url: 'foxy.webp',
+  },
+  {
+    id: 21,
+    name: 'Тигр',
+    url: 'tiger.webp',
+  },
+  {
+    id: 22,
+    name: 'Марал',
+    url: 'Maral.webp',
+  },
+  {
+    id: 23,
+    name: 'Як',
+    url: 'yak.webp',
+  },
+  {
+    id: 24,
+    name: 'Верблюд',
+    url: 'camel.webp',
+  },
+];

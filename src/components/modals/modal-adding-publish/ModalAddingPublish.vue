@@ -39,13 +39,13 @@
 </template>
 
 <script lang="ts" setup>
-  import Modal from './ui/modal/Modal.vue';
   import VueDatePicker from '@vuepic/vue-datepicker';
   import '@vuepic/vue-datepicker/dist/main.css';
   import { defineModel, ref, defineEmits, onMounted } from 'vue';
   import { axios } from '@/plugins/axios';
   import { showNotification } from '@/plugins/notifications';
   import { useEventsStore } from '@/entities/events/model';
+  import { Modal } from '@/components';
 
   const eventStore = useEventsStore();
   const isModalAddingOpen = defineModel<boolean>('isModalAddingOpen', { required: true });

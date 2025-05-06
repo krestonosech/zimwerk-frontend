@@ -11,7 +11,6 @@
     display: flex;
     flex-direction: column;
     min-height: 900px;
-    //TODO поменять размер при необходимости
     gap: 100px;
     padding: 32px 0;
   }

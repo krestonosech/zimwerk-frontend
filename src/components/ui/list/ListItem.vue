@@ -3,10 +3,10 @@
     class="list-item"
     :class="{
       'list-item__border-none': isLastElement,
-      'list-item__cursor': !isExcirsions,
-      'list-item_hover': !isExcirsions,
+      'list-item__cursor': !isExcirsions && !userStore.user.isAdmin,
+      'list-item_hover': !isExcirsions && !userStore.user.isAdmin,
     }"
-    @click="emit('click')"
+    @click="click"
   >
     <div class="list-item__text">{{ props.name }}</div>
     <div class="list-item__date">{{ props.date || props.duration }}</div>
@@ -15,8 +15,10 @@
 </template>
 
 <script setup lang="ts">
+  import { useUserStore } from '@/entities/user';
   import { defineProps, defineEmits } from 'vue';
 
+  const userStore = useUserStore();
   const props = defineProps<{
     id?: number;
     name?: string;
@@ -29,32 +31,14 @@
   }>();
 
   const emit = defineEmits(['click']);
+
+  function click() {
+    if (props.isExcirsions || userStore.user.isAdmin) return;
+    emit('click');
+  }
 </script>
 
 <style lang="scss" scoped>
-  .ticket-buying {
-    display: flex;
-    flex-direction: column;
-    font-family: Roboto;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    gap: 10px;
-
-    &__lines {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &__buttons {
-      display: flex;
-      gap: 15px;
-      &__button {
-        background-color: white;
-        border: none;
-      }
-    }
-  }
   .list-item {
     min-height: 100px;
     display: flex;

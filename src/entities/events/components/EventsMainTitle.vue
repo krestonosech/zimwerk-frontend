@@ -1,7 +1,7 @@
 <template>
   <div class="main-title">
     <div class="main-title__block">
-      <p class="main-title__text">Ближайшие события</p>
+      <Title text="Ближайшие события" />
       <div class="main-title__button">
         <Button
           transparent
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+  import { Title } from '@/components';
   import { Button } from '@/components/ui/button';
   import { router } from '@/router';
 </script>
@@ -27,12 +28,6 @@
       display: flex;
       width: 100%;
       justify-content: space-between;
-    }
-    &__text {
-      font-family: 'AA Stetica';
-      font-weight: 400;
-      font-size: 64px;
-      line-height: 72px;
     }
     &__button {
       display: flex;

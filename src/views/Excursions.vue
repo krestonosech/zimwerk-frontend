@@ -1,7 +1,7 @@
 <template>
   <PageContent>
     <div class="excursions">
-      <p class="excursions__title">Экскурсии</p>
+      <Title text="Экскурсии" />
       <Chips />
       <List
         v-if="items?.length"
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { PageContent } from '@/components';
+  import { PageContent, Title } from '@/components';
   import { Chips } from '@/components/ui/chips';
   import { List } from '@/components/ui/list';
   import { ListItemProps } from '@/components/ui/list/types';
