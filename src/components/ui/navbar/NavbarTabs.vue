@@ -1,26 +1,57 @@
 <template>
   <div class="button-group">
-    <RouterLink
-      v-for="(item, index) in allButtons"
-      :key="index"
-      :to="`/${item.id}`"
-      class="button-group__button"
-      :class="{
-        'button-group__button': filterStore.page !== item.id,
-      }"
-      @click="filterStore.page = item.id"
-    >
-      <p :class="{ 'button-group__isActive': router.currentRoute.value.name === item.id }">
-        {{ item.label }}
-      </p>
-    </RouterLink>
     <div
-      class="button-group__profile-wrapper"
-      @mouseenter="isShowProfile = true"
-      @mouseleave="isShowProfile = false"
+      class="burger-icon"
+      @click="isBurgerOpen = !isBurgerOpen"
     >
-      <p class="button-group__button">ЛИЧНЫЙ КАБИНЕТ</p>
-      <NavbarDropdown :is-show-profile="isShowProfile" />
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div
+      class="button-group__items"
+      :class="{ 'button-group__items--open': isBurgerOpen }"
+    >
+      <RouterLink
+        v-for="(item, index) in allButtons"
+        :key="index"
+        :to="`/${item.id}`"
+        class="button-group__button"
+        :class="{
+          'button-group__button': filterStore.page !== item.id,
+        }"
+        @click="
+          filterStore.page = item.id;
+          isBurgerOpen = false;
+        "
+      >
+        <p
+          class="button-group__p"
+          :class="{ 'button-group__isActive': router.currentRoute.value.name === item.id }"
+        >
+          {{ item.label }}
+        </p>
+      </RouterLink>
+      <div
+        class="button-group__profile-wrapper"
+        @mousedown="isShowProfile = !isShowProfile"
+      >
+        <div class="button-group__profile-wrapper-div">
+          <p class="button-group__button">ЛИЧНЫЙ КАБИНЕТ</p>
+          <img :src="isShowProfile ? Up : Down" />
+        </div>
+        <NavbarDropdown
+          v-model:isBurgerOpen="isBurgerOpen"
+          :is-show-profile="isShowProfile"
+        />
+      </div>
+      <p
+        v-if="!userStore.user.isAdmin"
+        class="button-group__profile-wrapper"
+      >
+        +7(3012) 33-25-10
+      </p>
     </div>
   </div>
 </template>
@@ -32,9 +63,12 @@
   import { router } from '@/router';
   import { computed, onMounted, ref } from 'vue';
   import NavbarDropdown from './NavbarDropdown.vue';
+  import Down from '@/assets/icons/chevron-down.svg';
+  import Up from '@/assets/icons/chevron-up.svg';
 
   const filterStore = useFiltersStore();
   const userStore = useUserStore();
+  const isBurgerOpen = ref(false);
   const isShowProfile = ref(false);
 
   onMounted(() => {
@@ -46,7 +80,7 @@
     { label: 'ЭТНОЗООСАД', id: 'etnozoo' },
     { label: 'ЭКСКУРСИИ', id: 'excursions' },
     { label: 'СОБЫТИЯ', id: 'events' },
-    { label: 'НОВОСТИ', id: 'news' },
+    { label: 'КАК ДОБРАТЬСЯ', id: 'path-to-museum' },
   ];
 
   const allButtons = computed<{ label: string; id: Filters['page'] }[]>(() => {
@@ -66,6 +100,7 @@
       position: relative;
       padding: 0 10px;
       font-weight: 400;
+      min-width: 70px !important;
       font-size: 16px;
       text-decoration: none;
       cursor: pointer;
@@ -73,12 +108,80 @@
       border: none;
       outline: none;
     }
+    &__p {
+      min-width: 100%;
+    }
     &__profile-wrapper {
       position: relative;
       display: inline-block;
     }
+    &__profile-wrapper-div {
+      display: flex;
+    }
     &__isActive {
       border-bottom: 2px solid #1e1e1e;
+    }
+
+    &__items {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      &--open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 100vw;
+        background: #fff;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+      }
+    }
+  }
+  .burger-icon {
+    display: none;
+    flex-direction: column;
+    width: 30px;
+    height: 24px;
+    justify-content: space-between;
+    cursor: pointer;
+    span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      background: #1e1e1e;
+      border-radius: 2px;
+    }
+  }
+
+  @media (max-width: 750px) {
+    .button-group {
+      .burger-icon {
+        display: flex;
+      }
+      &__items {
+        display: none;
+        &--open {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1440px) {
+    .button-group {
+      .burger-icon {
+        display: flex;
+      }
+      &__items {
+        display: none;
+        gap: 30px;
+        &--open {
+          display: flex;
+        }
+      }
     }
   }
 

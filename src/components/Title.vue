@@ -48,14 +48,23 @@
   }
 
   @media (max-width: 1440px) {
-    .xl__title {
+    .xl-title {
       font-size: 62px;
     }
   }
 
   @media (max-width: 750px) {
-    .xl__title .m-title {
+    .m-title {
+      line-height: inherit;
+      font-size: 32px;
+    }
+    .xl-title {
+      line-height: inherit;
       font-size: 40px;
+    }
+    .xs-title {
+      line-height: inherit;
+      font-size: 20px;
     }
   }
 </style>

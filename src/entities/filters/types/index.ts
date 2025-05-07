@@ -6,7 +6,9 @@ export interface Filters {
     | 'excursions'
     | 'events'
     | 'phone-number'
-    | 'news';
+    | 'news'
+    | 'profile'
+    | 'path-to-museum';
 }
 
 export interface ImagesProps {

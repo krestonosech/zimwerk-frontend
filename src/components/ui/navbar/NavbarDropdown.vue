@@ -9,21 +9,24 @@
         :to="'/profile'"
         class="profile-dropdown__item"
         style="text-decoration: none"
+        @click="emit('close')"
       >
-        {{ userStore.user.username }}
+        <Title
+          xs
+          :text="userStore.user.username"
+        />
       </RouterLink>
-      <p
+      <Text
         v-if="!userStore.user.isAdmin"
         style="padding: 10px 20px"
-      >
-        {{ userStore.user.email }}
-      </p>
-      <div
+        :text="userStore.user.email"
+      />
+      <Title
         class="profile-dropdown__item"
+        text="Выйти"
+        xs
         @click="logout"
-      >
-        Выйти
-      </div>
+      />
     </div>
   </Transition>
   <Transition name="dropdown">
@@ -64,16 +67,17 @@
 </template>
 
 <script lang="ts" setup>
-  import { ModalRegisterAuth } from '@/components';
+  import { ModalRegisterAuth, Text, Title } from '@/components';
   import { useUserStore } from '@/entities/user';
   import { router } from '@/router';
-  import { ref, defineModel } from 'vue';
+  import { ref, defineModel, defineEmits } from 'vue';
 
   const userStore = useUserStore();
   const isRegisterOpen = ref<boolean>(false);
   const isRegister = ref<boolean>(true);
   const isApply = ref<boolean>(false);
   const isShowProfile = defineModel<boolean>('isShowProfile', { required: true });
+  const emit = defineEmits(['close']);
 
   function logout() {
     localStorage.removeItem('token');
@@ -82,6 +86,7 @@
     userStore.user.username = '';
     userStore.user.id = 0;
     router.push('/main');
+    emit('close');
     location.reload();
   }
 </script>

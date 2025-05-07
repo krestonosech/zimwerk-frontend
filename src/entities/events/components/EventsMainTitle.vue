@@ -35,9 +35,15 @@
     }
   }
   @media (max-width: 750px) {
-    .main-title__text {
-      font-size: 24px;
-      line-height: 32px;
+    .main-title {
+      &__text {
+        font-size: 24px;
+        line-height: 32px;
+      }
+      /* &__block {
+        display: flex;
+        flex-direction: column;
+      } */
     }
   }
 </style>

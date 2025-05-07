@@ -1,23 +1,25 @@
 <template>
   <Modal
     v-model:open="isModalAddingNewsOpen"
-    apply-button="Добавить"
-    title="Добавить публикацию"
+    :apply-button="isChange ? 'Изменить' : 'Добавить'"
+    :title="isChange ? 'Изменить новость' : 'Добавить новость'"
+    is-delete-item
+    @delete="deleteNews"
     @close="closeModal"
     @apply="addRequest"
   >
     <div class="register">
-      <input
+      <textarea
         v-model="title"
         class="register__input"
         placeholder="Название новости"
       />
-      <input
+      <textarea
         v-model="text"
         class="register__input"
         placeholder="Текст новости"
       />
-      <input
+      <textarea
         v-model="description"
         class="register__input"
         placeholder="Описание новости"
@@ -33,17 +35,34 @@
 </template>
 
 <script lang="ts" setup>
-  import { defineModel, ref, defineEmits } from 'vue';
+  import { defineModel, ref, defineEmits, defineProps, watch } from 'vue';
   import { axios } from '@/plugins/axios';
   import { showNotification } from '@/plugins/notifications';
   import { Modal } from '@/components';
 
   const isModalAddingNewsOpen = defineModel<boolean>('isModalAddingNewsOpen', { required: true });
-  const emit = defineEmits(['close']);
+  const props = defineProps<{
+    id?: number;
+    title?: string;
+    text?: string;
+    description?: string;
+    image?: string;
+    isChange?: boolean;
+  }>();
+  const emit = defineEmits(['close', 'success']);
   const title = ref('');
   const text = ref('');
   const description = ref('');
   const image = ref<File | null>(null);
+
+  watch(
+    () => props.id,
+    () => {
+      title.value = props.title ?? '';
+      description.value = props.description ?? '';
+      text.value = props.text ?? '';
+    }
+  );
 
   function onFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -74,16 +93,58 @@
       if (image.value) {
         formData.append('image', image.value);
       }
+      if (props.id) {
+        formData.append('id', props.id.toString());
+      }
+      if (props.isChange) {
+        await axios.post('/change-news', formData, config);
+        showNotification({
+          text: 'Новость изменена!',
+          type: 'success',
+        });
+      } else {
+        await axios.post('/add-news', formData, config);
+        showNotification({
+          text: 'Новость создана!',
+          type: 'success',
+        });
+      }
+      closeModal();
+      emit('success');
+    } catch {
+      if (props.isChange) {
+        showNotification({
+          text: 'Не удалось изменить новость!',
+          type: 'error',
+        });
+      } else {
+        showNotification({
+          text: 'Не удалось добавить новость!',
+          type: 'error',
+        });
+      }
+    }
+  }
 
-      await axios.post('/add-news', formData, config);
+  async function deleteNews() {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+
+      await axios.post('/delete-news', { id: props.id }, config);
       closeModal();
       showNotification({
-        text: 'Новость создана!',
+        text: 'Новость удалена!',
         type: 'success',
       });
+      closeModal();
+      emit('success');
     } catch {
       showNotification({
-        text: 'Не удалось добавить новость!',
+        text: 'Не удалось удались новость!',
         type: 'error',
       });
     }
@@ -98,8 +159,7 @@
     &__input {
       border: none;
       border-bottom: solid 1px #bababa;
-      width: 550;
-      height: 44;
+      min-height: 44px;
       padding: 10px;
       gap: 10px;
       border-bottom-width: 1px;

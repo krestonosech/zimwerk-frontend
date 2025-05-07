@@ -5,6 +5,7 @@
       <NewsItem
         v-if="items"
         :items="items"
+        @success="async () => await newsStore.fetchAllNews()"
       />
     </div>
   </PageContent>

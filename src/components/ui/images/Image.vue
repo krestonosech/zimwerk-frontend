@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="image__div">
     <img
       :src="image"
       :alt="name"
@@ -57,7 +57,7 @@
   @media (max-width: 1440px) {
     .image {
       &__image {
-        padding: 16px;
+        padding: 16px 0;
       }
     }
   }
@@ -66,7 +66,11 @@
       &__image {
         width: 300px;
         height: 200px;
-        padding: 16px;
+        padding: 16px 0;
+      }
+      &__div {
+        display: flex;
+        justify-content: center;
       }
     }
   }

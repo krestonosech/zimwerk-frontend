@@ -3,8 +3,8 @@
     class="list-item"
     :class="{
       'list-item__border-none': isLastElement,
-      'list-item__cursor': !isExcirsions && !userStore.user.isAdmin,
-      'list-item_hover': !isExcirsions && !userStore.user.isAdmin,
+      'list-item__cursor': !isArchive && !isExcirsions && !userStore.user.isAdmin,
+      'list-item_hover': !isArchive && !isExcirsions && !userStore.user.isAdmin,
     }"
     @click="click"
   >
@@ -21,6 +21,7 @@
   const userStore = useUserStore();
   const props = defineProps<{
     id?: number;
+    isArchive?: boolean;
     name?: string;
     date?: string;
     description?: string;

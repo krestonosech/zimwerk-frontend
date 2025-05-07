@@ -18,6 +18,12 @@
         <slot />
         <div class="modal__buttons">
           <Button
+            v-if="isDeleteItem"
+            @click="emit('delete')"
+          >
+            УДАЛИТЬ
+          </Button>
+          <Button
             black
             @click="emit('apply')"
           >
@@ -37,10 +43,11 @@
     title: string;
     warning?: boolean;
     applyButton: string;
+    isDeleteItem?: boolean;
   }>();
 
   const open = defineModel<boolean>('open', { required: true });
-  const emit = defineEmits(['apply', 'close']);
+  const emit = defineEmits(['apply', 'close', 'delete']);
 
   function close() {
     open.value = false;

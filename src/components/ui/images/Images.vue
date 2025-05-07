@@ -7,7 +7,6 @@
       v-for="(item, index) in items"
       :key="index"
       class="image__element"
-      style="border-top: solid #bababa 1px; margin-bottom: 30px"
     >
       <p
         v-if="!item.name_2"
@@ -70,6 +69,8 @@
     justify-content: space-between;
     flex-wrap: wrap;
     &__element {
+      border-top: solid #bababa 1px;
+      margin-bottom: 30px;
       display: flex;
       flex-direction: column;
       &__padding {
@@ -107,6 +108,9 @@
         width: 300px;
         height: 200px;
         padding: 16px;
+      }
+      &__element {
+        margin-bottom: 0;
       }
     }
   }

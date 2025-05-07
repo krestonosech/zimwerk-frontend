@@ -7,6 +7,7 @@
         v-if="upcomingEvents?.length"
         :items="upcomingEvents"
         @open-item-model="item => openItemModal(item)"
+        @success="async () => await eventsStore.fetchAllEvents('Все')"
       />
       <div v-else>
         <p class="events__p">Нет предстоящих событий такого типа</p>
@@ -18,7 +19,8 @@
       <List
         v-if="archivedEvents?.length"
         :items="archivedEvents"
-        excursions
+        is-archive
+        @success="async () => await eventsStore.fetchAllArchiveEvents('Все')"
       />
       <div v-else>
         <p class="events__p">Нет архивированных событий такого типа</p>
@@ -57,9 +59,9 @@
   const date = ref('');
   const isRegisterOpen = ref<boolean>(false);
 
-  onMounted(() => {
-    eventsStore.fetchAllArchiveEvents('Все');
-    eventsStore.fetchAllEvents('Все');
+  onMounted(async () => {
+    await eventsStore.fetchAllArchiveEvents('Все');
+    await eventsStore.fetchAllEvents('Все');
   });
 
   function openItemModal(item: any) {

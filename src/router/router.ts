@@ -53,6 +53,12 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/NewsItemPage.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/path-to-museum',
+    name: 'path-to-museum',
+    component: () => import('../views/PathToMuseum.vue'),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = createRouter({

@@ -38,6 +38,7 @@
     gap: 40px;
     &__header {
       display: flex;
+      justify-content: space-between;
       gap: 10px;
       padding: 10px 0;
     }
@@ -75,6 +76,14 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+      }
+      &__info {
+        &__username {
+          justify-content: start;
+        }
+        &__email {
+          justify-content: start;
+        }
       }
     }
     .profile__info {

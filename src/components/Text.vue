@@ -43,4 +43,19 @@
     font-size: 16px;
     line-height: 20px;
   }
+
+  @media (max-width: 750px) {
+    .m-text {
+      line-height: inherit;
+      font-size: 16px;
+    }
+    .xl-text {
+      line-height: inherit;
+      font-size: 16px;
+    }
+    /* .xs-text {
+      line-height: inherit;
+      font-size: 12px;
+    } */
+  }
 </style>
