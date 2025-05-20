@@ -1,0 +1,84 @@
+.main {
+  &__first {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    background-image:
+      linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent 30%),
+      linear-gradient(to top, rgb(0, 0, 29), transparent 80%),
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url('@/assets/images/7.webp');
+  
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &__first--element {
+    width: 1440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
+  }
+  &__seventh {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: 
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(44, 58, 85, 0.8)),
+      url('@/assets/images/seventh1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &__seventh-element {
+    width: 1440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+  }
+  &__seventh-text {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    background-color: rgba(0, 9, 55, 0.245);
+    backdrop-filter: blur(10px);
+    width: 700px;
+  }
+  &__seventh-1 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: 
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(44, 58, 85, 0.8)),
+      url('@/assets/images/seventh2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  &__seventh-element-1 {
+    width: 1440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    gap: 40px;
+  }
+  &__seventh-text-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px;
+    background-color: rgba(0, 9, 55, 0.245);
+    backdrop-filter: blur(10px);
+    width: 700px;
+  }
+}

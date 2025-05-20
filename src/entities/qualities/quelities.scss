@@ -1,0 +1,28 @@
+.main {
+  &__sixth {
+    width: 100vw;
+    background: linear-gradient(135deg, #162636 0%, #395a74 100%);
+    display: flex;
+    justify-content: center;
+    &--selected {
+      background-color: white;
+    }
+  }
+
+  &__sixth-element {
+    width: 1440px;
+    display: flex;
+    gap: 40px;
+  }
+  &__sixth-img {
+    padding: 40px 40px 40px 0;
+    width: 620px;
+    height: 620px;
+  }
+  &__sixth-text {
+    height: 700px;
+    &--element {
+      padding: 40px;
+    }
+  }
+}

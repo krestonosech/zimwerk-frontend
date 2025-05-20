@@ -24,7 +24,7 @@
   }>();
 
   const isRegisterOpen = defineModel<boolean>('isRegisterOpen', { required: true });
-  const isRegister = computed(() => props.is);
+  const isRegister = computed(() => props.is || false);
 
   const isApply = ref<boolean>(false);
 

@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   const requestsStorage = ref<Requests[] | null>(null);
   const isFetching = computed(() => userStorage.value !== null);
   const failedAuthDcoMessage = ref<string>('');
+  const token = computed(() => localStorage.getItem('token'));
 
   const user = computed(() => ({
     id: userStorage.value?.id || 0,
@@ -16,6 +17,8 @@ export const useUserStore = defineStore('user', () => {
     username: userStorage.value?.username || '',
     email: userStorage.value?.email || '',
     requests: requestsStorage.value || [],
+    phone: userStorage.value?.phone || null,
+    isSendedReview: userStorage.value?.isSendedReview || undefined,
   }));
 
   async function loginUser(email: string, password: string): Promise<string | undefined> {
@@ -62,6 +65,7 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     user,
+    token,
     isFetching,
     failedAuthDcoMessage,
     loginUser,

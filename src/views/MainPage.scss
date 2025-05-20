@@ -1,0 +1,38 @@
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+input {
+  width: 464px;
+  height: 48px;
+  padding: 4px 24px;
+  border-radius: 9999px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+}
+input::placeholder {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+}
+.circle-logo {
+  width: 80px;
+  height: 80px;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.7s ease;
+}
+.icon:hover {
+  border-radius: 8px;
+  background-color: rgb(74, 115, 162);
+  transition: 0.7s ease;
+}

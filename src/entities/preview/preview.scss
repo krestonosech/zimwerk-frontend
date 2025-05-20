@@ -1,0 +1,33 @@
+.main {
+  &__second {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding-top: 40px;
+  }
+
+  &__third {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+  }
+  &__third-element {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    padding: 24px;
+    background: linear-gradient(135deg, #162636 0%, #395a74 100%);
+    border-radius: 20px;
+    width: 50%;
+  }
+  &__third-icons {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+}

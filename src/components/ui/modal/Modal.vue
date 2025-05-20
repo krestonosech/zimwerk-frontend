@@ -17,19 +17,19 @@
         <p class="modal__title">{{ props.title }}</p>
         <slot />
         <div class="modal__buttons">
-          <Button
+          <button
             v-if="isDeleteItem"
             @click="emit('delete')"
           >
             УДАЛИТЬ
-          </Button>
-          <Button
+          </button>
+          <button
             black
             @click="emit('apply')"
           >
             {{ applyButton.toUpperCase() }}
-          </Button>
-          <Button @click="close">ОТМЕНА</Button>
+          </button>
+          <button @click="close">ОТМЕНА</button>
         </div>
       </div>
     </div>
@@ -38,7 +38,6 @@
 
 <script lang="ts" setup>
   import { defineProps, defineModel, defineEmits } from 'vue';
-  import { Button } from '../button';
   const props = defineProps<{
     title: string;
     warning?: boolean;
@@ -115,5 +114,17 @@
   .modal-fade-leave-from {
     opacity: 1;
     transform: scale(1);
+  }
+
+  button {
+    background-color: transparent;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: black;
   }
 </style>

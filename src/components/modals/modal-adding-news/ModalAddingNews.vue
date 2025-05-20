@@ -2,28 +2,41 @@
   <Modal
     v-model:open="isModalAddingNewsOpen"
     :apply-button="isChange ? 'Изменить' : 'Добавить'"
-    :title="isChange ? 'Изменить новость' : 'Добавить новость'"
-    is-delete-item
-    @delete="deleteNews"
+    :title="isChange ? 'Изменить товар' : 'Добавить товар'"
+    :is-delete-item="isChange"
+    @delete="deleteGood"
     @close="closeModal"
     @apply="addRequest"
   >
-    <div class="register">
-      <textarea
-        v-model="title"
+    <div
+      class="register"
+      style="align-items: center"
+    >
+      <input
+        v-model="name"
         class="register__input"
-        placeholder="Название новости"
+        placeholder="Название товара"
       />
-      <textarea
-        v-model="text"
-        class="register__input"
-        placeholder="Текст новости"
-      />
-      <textarea
+      <input
         v-model="description"
         class="register__input"
-        placeholder="Описание новости"
+        placeholder="Описание товара"
       />
+      <input
+        v-model="price"
+        class="register__input"
+        placeholder="Цена товара"
+      />
+      <select
+        v-model="type"
+        class="register__input"
+        placeholder="Цена товара"
+      >
+        <option value="Моторы"><Text text="Моторы" /></option>
+        <option value="Электрооборудование"><Text text="Электрооборудование" /></option>
+        <option value="Топливо"><Text text="Топливо" /></option>
+        <option value="Рулевое управление"><Text text="Рулевое управление" /></option>
+      </select>
       <input
         type="file"
         class="register__input"
@@ -38,29 +51,32 @@
   import { defineModel, ref, defineEmits, defineProps, watch } from 'vue';
   import { axios } from '@/plugins/axios';
   import { showNotification } from '@/plugins/notifications';
-  import { Modal } from '@/components';
+  import { Modal, Text } from '@/components';
 
   const isModalAddingNewsOpen = defineModel<boolean>('isModalAddingNewsOpen', { required: true });
   const props = defineProps<{
     id?: number;
-    title?: string;
-    text?: string;
+    name?: string;
+    price?: string;
     description?: string;
     image?: string;
+    type?: string;
     isChange?: boolean;
   }>();
   const emit = defineEmits(['close', 'success']);
-  const title = ref('');
-  const text = ref('');
+  const name = ref('');
+  const price = ref('');
+  const type = ref('');
   const description = ref('');
   const image = ref<File | null>(null);
 
   watch(
     () => props.id,
     () => {
-      title.value = props.title ?? '';
+      name.value = props.name ?? '';
       description.value = props.description ?? '';
-      text.value = props.text ?? '';
+      price.value = props.price ?? '';
+      type.value = props.type ?? '';
     }
   );
 
@@ -87,9 +103,10 @@
       };
 
       const formData = new FormData();
-      formData.append('title', title.value);
-      formData.append('text', text.value);
+      formData.append('name', name.value);
+      formData.append('price', price.value);
       formData.append('description', description.value);
+      formData.append('type', type.value);
       if (image.value) {
         formData.append('image', image.value);
       }
@@ -97,13 +114,13 @@
         formData.append('id', props.id.toString());
       }
       if (props.isChange) {
-        await axios.post('/change-news', formData, config);
+        await axios.post('/change-good', formData, config);
         showNotification({
           text: 'Новость изменена!',
           type: 'success',
         });
       } else {
-        await axios.post('/add-news', formData, config);
+        await axios.post('/add-good', formData, config);
         showNotification({
           text: 'Новость создана!',
           type: 'success',
@@ -114,19 +131,19 @@
     } catch {
       if (props.isChange) {
         showNotification({
-          text: 'Не удалось изменить новость!',
+          text: 'Не удалось изменить товар!',
           type: 'error',
         });
       } else {
         showNotification({
-          text: 'Не удалось добавить новость!',
+          text: 'Не удалось добавить товар!',
           type: 'error',
         });
       }
     }
   }
 
-  async function deleteNews() {
+  async function deleteGood() {
     try {
       const config = {
         headers: {
@@ -134,17 +151,17 @@
         },
       };
 
-      await axios.post('/delete-news', { id: props.id }, config);
+      await axios.post('/delete-good', { id: props.id }, config);
       closeModal();
       showNotification({
-        text: 'Новость удалена!',
+        text: 'Товар удален!',
         type: 'success',
       });
       closeModal();
       emit('success');
     } catch {
       showNotification({
-        text: 'Не удалось удались новость!',
+        text: 'Не удалось удались товар!',
         type: 'error',
       });
     }
@@ -178,5 +195,42 @@
       outline: none;
       border-bottom: solid 1px #bababa;
     }
+  }
+
+  button {
+    background-color: transparent;
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    color: black !important;
+  }
+
+  input {
+    padding-left: 30px !important;
+    border: solid white 2px !important;
+    border-bottom: solid black 1px !important;
+  }
+  input:focus {
+    border-bottom: solid black 1px !important;
+    border: solid black 2px !important;
+  }
+
+  select {
+    border-radius: 30px;
+    height: 71px;
+    padding: 0 40px;
+    border: solid white 2px !important;
+    border-bottom: solid black 1px !important;
+    width: 508px;
+  }
+  select:focus {
+    border-bottom: solid black 1px !important;
+    border: solid black 2px !important;
+  }
+  select,
+  option {
+    font-family: 'YourFont', sans-serif;
+    font-size: 18px;
+    text-align: center;
   }
 </style>

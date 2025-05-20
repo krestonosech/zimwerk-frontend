@@ -1,0 +1,16 @@
+.main {
+  &__eleventh {
+    background-color: white;
+    width: 100vw;
+    padding: 0 0 40px 0;
+    display: flex;
+    justify-content: center;
+  }
+  &__eleventh-element {
+    width: 1440px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

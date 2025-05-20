@@ -1,0 +1,56 @@
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  min-height: 100vh;
+  gap: 80px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+button {
+  background-color: transparent;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: 400;
+  color: white;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.admin-panel__table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 16px 8px;
+  table-layout: fixed;
+}
+
+.admin-panel__table th,
+.admin-panel__table td {
+  padding: 8px 12px;
+  background-color: transparent;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-panel__table thead th {
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.admin-panel__table {
+  margin-bottom: 32px;
+}
+
+.admin-panel__table table td {
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}

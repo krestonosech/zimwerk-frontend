@@ -1,0 +1,56 @@
+.main {
+  &__fourth {
+    padding: 80px 0;
+    width: 100vw;
+    background: linear-gradient(135deg, #162636 0%, #395a74 100%);
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.cars {
+  width: 1440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  &__cars {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+.car {
+  position: relative;
+  min-width: 150px;
+  border-radius: 20px;
+  height: 375px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #162636 0%, #395a74 100%);
+    mix-blend-mode: screen;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+.img {
+  height: 100px;
+  filter: brightness(0) invert(1);
+}

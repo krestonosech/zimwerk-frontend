@@ -10,7 +10,11 @@
   * {
     padding: 0;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'GothamPro', Arial, sans-serif;
     color: #1e1e1e;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 </style>

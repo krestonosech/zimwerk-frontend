@@ -5,6 +5,8 @@
       'xl-title': xl,
       'm-title': m,
       'xs-title': xs,
+      black,
+      up,
     }"
   >
     {{ text }}
@@ -19,32 +21,43 @@
     m?: boolean;
     xs?: boolean;
     text: string;
+    up?: boolean;
+    black?: boolean;
   }>();
 </script>
 
 <style lang="scss" scoped>
+  .up {
+    text-transform: uppercase;
+  }
   .m-title {
-    font-family: 'AA Stetica';
-    font-weight: 400;
+    font-family: 'GothamPro', Arial, sans-serif;
+    color: white;
+    font-weight: 600;
     font-size: 64px;
     line-height: 72px;
   }
 
   .xl-title {
-    font-family: 'AA Stetica';
-    font-weight: 400;
+    font-family: 'GothamPro', Arial, sans-serif;
+    color: white;
+    font-weight: 600;
     font-size: 118px;
     line-height: 100%;
     letter-spacing: 0%;
     padding-bottom: 20px;
-    border-bottom: solid black 2px;
   }
 
   .xs-title {
-    font-family: 'Roboto';
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
+    font-family: 'GothamPro', Arial, sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .black {
+    color: black !important;
   }
 
   @media (max-width: 1440px) {

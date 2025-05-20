@@ -1,0 +1,30 @@
+.main {
+  &__all-goods {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 1440px;
+    padding-bottom: 80px;
+  }
+  &__all-goods-buttons {
+    padding: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  &__good {
+    display: flex;
+    width: 300px;
+    padding: 20px;
+    background-color: whitesmoke;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+    height: 425px;
+    border-radius: 30px;
+  }
+}
+
+.isActive {
+  border-bottom: solid black 2px;
+}
