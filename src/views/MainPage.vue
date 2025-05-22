@@ -9,7 +9,9 @@
     <AboutPreview />
     <Cars id="cars" />
     <div class="main__fifth">
-      <Requests id="requests" />
+      <div id="requests">
+        <Requests />
+      </div>
       <AllGoods />
       <div style="width: 1440px; padding-bottom: 40px">
         <Title
@@ -26,8 +28,12 @@
       v-if="!username"
       id="request"
     />
-    <Contacts id="contacts" />
-    <AboutUs id="about-us" />
+    <div id="contacts">
+      <Contacts />
+    </div>
+    <div id="about-us">
+      <AboutUs />
+    </div>
   </div>
   <div v-else>
     <AdminPanel />

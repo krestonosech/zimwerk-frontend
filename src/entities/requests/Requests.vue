@@ -10,6 +10,7 @@
         <div
           class="main__fifth-buttons"
           :class="{ 'main__fifth-buttons--active': selected !== 'Ремонт двигателя' }"
+          @click="selected = 'Ремонт двигателя'"
         >
           <img
             :src="settings"
@@ -21,12 +22,12 @@
             hover
             xl
             text="Ремонт двигателя"
-            @click="selected = 'Ремонт двигателя'"
           />
         </div>
         <div
           class="main__fifth-buttons"
           :class="{ 'main__fifth-buttons--active': selected !== 'Ремонт подвески' }"
+          @click="selected = 'Ремонт подвески'"
         >
           <img
             :src="spring"
@@ -38,12 +39,12 @@
             hover
             xl
             text="Ремонт подвески"
-            @click="selected = 'Ремонт подвески'"
           />
         </div>
         <div
           class="main__fifth-buttons"
           :class="{ 'main__fifth-buttons--active': selected !== 'Техобслуживание' }"
+          @click="selected = 'Техобслуживание'"
         >
           <img
             :src="ink"
@@ -55,12 +56,12 @@
             hover
             xl
             text="Техобслуживание"
-            @click="selected = 'Техобслуживание'"
           />
         </div>
         <div
           class="main__fifth-buttons"
           :class="{ 'main__fifth-buttons--active': selected !== 'Диагностика' }"
+          @click="selected = 'Диагностика'"
         >
           <img
             :src="search"
@@ -72,7 +73,6 @@
             hover
             xl
             text="Диагностика"
-            @click="selected = 'Диагностика'"
           />
         </div>
       </div>
@@ -158,6 +158,18 @@
       </div>
     </div>
   </div>
+  <Modal
+    v-model:open="isModalOpen"
+    :apply-button="'Оформить'"
+    :title="'Подтверждение'"
+    @close="closeModal"
+    @apply="clickButton"
+  >
+    <Text
+      black
+      text="Вы уверены, что хотите оформить заявку?"
+    />
+  </Modal>
   <ModalRegisterAuth v-model:is-register-open="isRegisterOpen" />
 </template>
 
@@ -170,7 +182,7 @@
   import instrumenti from '@/assets/images/instrumenti.png';
   import Spring from '@/assets/images/spring.png';
   import diagnostic from '@/assets/images/diagnostic.png';
-  import { Button, ModalRegisterAuth, Text, Title } from '@/components';
+  import { Button, Modal, ModalRegisterAuth, Text, Title } from '@/components';
   import { ref } from 'vue';
   import './requests.scss';
   import { axios } from '@/plugins/axios';
@@ -180,34 +192,43 @@
   const userStore = useUserStore();
   const selected = ref('Ремонт двигателя');
   const isRegisterOpen = ref(false);
+  const isModalOpen = ref(false);
+
+  function closeModal() {
+    isModalOpen.value = false;
+  }
+
+  async function clickButton() {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+
+      const data = {
+        username: userStore.user.username,
+        service: selected.value,
+        phone: userStore.user.phone,
+      };
+
+      await axios.post('/add-another-requests', data, config);
+
+      showNotification({
+        text: 'Вы записались!',
+        type: 'success',
+      });
+    } catch (error) {
+      showNotification({
+        text: 'Не удалось записаться!',
+        type: 'error',
+      });
+    }
+  }
 
   async function addRequest() {
     if (userStore.user.id) {
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        };
-
-        const data = {
-          username: userStore.user.username,
-          service: selected.value,
-          phone: userStore.user.phone,
-        };
-
-        await axios.post('/add-another-requests', data, config);
-
-        showNotification({
-          text: 'Вы записались!',
-          type: 'success',
-        });
-      } catch (error) {
-        showNotification({
-          text: 'Не удалось записаться!',
-          type: 'error',
-        });
-      }
+      isModalOpen.value = true;
     } else {
       isRegisterOpen.value = true;
     }

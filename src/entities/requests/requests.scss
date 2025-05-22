@@ -36,11 +36,11 @@
   &__fifth-text {
     display: flex;
     padding: 56px 40px 0 40px;
-  
+
     opacity: 0;
     transform: translateY(20px);
     animation: slideUpFadeIn 1s forwards ease;
-    
+
     &--el {
       width: 50%;
       display: flex;
@@ -50,7 +50,7 @@
       padding-right: 40px;
     }
   }
-  
+
   @keyframes slideUpFadeIn {
     to {
       opacity: 1;

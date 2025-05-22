@@ -1,71 +1,82 @@
 <template>
-  <div class="main__good">
-    <div style="display: flex; justify-content: center">
-      <img
-        :src="`data:image/jpeg;base64,${props.item.image}`"
-        alt="Изображение товара"
-        style="width: 300px; height: 200px"
-      />
-    </div>
+  <Tooltip>
+    <template #default>
+      <div class="main__good">
+        <div style="display: flex; justify-content: center">
+          <img
+            :src="`data:image/jpeg;base64,${props.item.image}`"
+            alt="Изображение товара"
+            style="width: 300px; height: 200px"
+          />
+        </div>
 
-    <Title
-      black
-      xs
-      :text="`${props.item.price} ₽`"
-    />
-    <Text
-      black
-      :text="`${props.item.name}`"
-    />
-    <div style="display: flex; justify-content: center">
-      <button
-        v-if="!isInCart"
-        style="background-color: white; border-radius: 20px; width: 100%"
-        @click="putInCart(props.item)"
-      >
+        <Title
+          black
+          xs
+          :text="`${props.item.price} ₽`"
+        />
         <Text
           black
-          text="Положить в корзину"
+          :text="`${props.item.name}`"
         />
-      </button>
-      <div
-        v-else
-        style="
-          background-color: white;
-          border-radius: 20px;
-          height: 68px;
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
-        <button @click="removeNumber(props.item.id)">
-          <img
-            :src="Minus"
-            style="width: 16px; height: 16px"
-            alt="Минус"
-          />
-        </button>
-        <Text
-          black
-          :text="currentQuantity.toString()"
-        />
-        <button @click="addingNumber(props.item.max, props.item.id)">
-          <img
-            :src="Plus"
-            style="width: 16px; height: 16px"
-            alt="Плюс"
-          />
-        </button>
+        <div style="display: flex; justify-content: center">
+          <button
+            v-if="!isInCart"
+            style="background-color: white; border-radius: 20px; width: 100%"
+            @click="putInCart(props.item)"
+          >
+            <Text
+              black
+              text="Положить в корзину"
+            />
+          </button>
+          <div
+            v-else
+            style="
+              background-color: white;
+              border-radius: 20px;
+              height: 68px;
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <button @click="removeNumber(props.item.id)">
+              <img
+                :src="Minus"
+                style="width: 16px; height: 16px"
+                alt="Минус"
+              />
+            </button>
+            <Text
+              black
+              :text="currentQuantity.toString()"
+            />
+            <button @click="addingNumber(props.item.max, props.item.id)">
+              <img
+                :src="Plus"
+                style="width: 16px; height: 16px"
+                alt="Плюс"
+              />
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+
+    <template #content>
+      <Text
+        :text="`Описание: ${props.item.description}` || 'Нет описания'"
+        style="white-space: normal; word-break: break-word; max-width: 400px"
+      />
+    </template>
+  </Tooltip>
   <ModalRegisterAuth v-model:is-register-open="isRegisterOpen" />
 </template>
 
 <script lang="ts" setup>
-  import { ModalRegisterAuth, Text, Title } from '@/components';
+  import { ModalRegisterAuth, Text, Title, Tooltip } from '@/components';
   import { defineProps, ref, computed } from 'vue';
   import './goods.scss';
   import Plus from '@/assets/icons/plus.svg';

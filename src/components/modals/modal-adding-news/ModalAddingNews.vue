@@ -25,7 +25,14 @@
       <input
         v-model="price"
         class="register__input"
+        type="number"
         placeholder="Цена товара"
+      />
+      <input
+        v-model="max"
+        class="register__input"
+        type="number"
+        placeholder="Максимальное кол-во"
       />
       <select
         v-model="type"
@@ -57,17 +64,19 @@
   const props = defineProps<{
     id?: number;
     name?: string;
-    price?: string;
+    price?: number;
     description?: string;
     image?: string;
+    max?: number;
     type?: string;
     isChange?: boolean;
   }>();
   const emit = defineEmits(['close', 'success']);
   const name = ref('');
-  const price = ref('');
+  const price = ref();
   const type = ref('');
   const description = ref('');
+  const max = ref();
   const image = ref<File | null>(null);
 
   watch(
@@ -75,7 +84,7 @@
     () => {
       name.value = props.name ?? '';
       description.value = props.description ?? '';
-      price.value = props.price ?? '';
+      price.value = props.price ?? 0;
       type.value = props.type ?? '';
     }
   );
@@ -104,7 +113,8 @@
 
       const formData = new FormData();
       formData.append('name', name.value);
-      formData.append('price', price.value);
+      formData.append('price', price.value.toString());
+      formData.append('max', max.value.toString());
       formData.append('description', description.value);
       formData.append('type', type.value);
       if (image.value) {

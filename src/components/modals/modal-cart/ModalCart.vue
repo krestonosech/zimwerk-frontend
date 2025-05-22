@@ -18,27 +18,34 @@
       <div
         v-for="item in goodsStore.selectedGoods"
         :key="item.id"
-        style="display: flex; justify-content: space-between; gap: 20px; align-items: center"
+        style="display: flex; justify-content: space-between; align-items: center"
       >
-        <img
-          :src="`data:image/jpeg;base64,${item.image}`"
-          alt="Изображение товара"
-          style="width: 150px; height: 100px"
-        />
-        <div style="display: flex; flex-direction: column">
-          <Text
-            xl
-            black
-            :text="item.name"
-          />
-          <Text
-            black
-            :text="item.description || 'У товара нет описания'"
-          />
-          <Text
-            black
-            :text="`${item.price} ₽`"
-          />
+        <div style="display: flex; gap: 20px">
+          <div style="display: flex; align-items: center">
+            <img
+              :src="`data:image/jpeg;base64,${item.image}`"
+              alt="Изображение товара"
+              style="width: 150px; height: 100px"
+            />
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <Text
+              xl
+              black
+              :text="item.name"
+            />
+            <Text
+              black
+              xs
+              :text="item.description || 'У товара нет описания'"
+              style="white-space: normal; word-break: break-word"
+            />
+            <Text
+              black
+              :text="`${item.price} ₽`"
+            />
+          </div>
         </div>
         <div
           style="

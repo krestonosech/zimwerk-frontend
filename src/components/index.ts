@@ -5,5 +5,6 @@ export * from './ui/modal';
 export * from './modals';
 export * from './ui/notifications';
 export * from './ui/icon';
+export * from './ui/tooltip';
 
 export { Title, Text };

@@ -1,5 +1,7 @@
 .main {
+  position: relative;
   &__all-goods {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -7,12 +9,14 @@
     padding-bottom: 80px;
   }
   &__all-goods-buttons {
+    position: relative;
     padding: 20px;
     border: none;
     cursor: pointer;
     background-color: transparent;
   }
   &__good {
+    position: relative;
     display: flex;
     width: 300px;
     padding: 20px;
@@ -22,9 +26,14 @@
     gap: 15px;
     height: 425px;
     border-radius: 30px;
+    overflow: visible !important;
   }
 }
 
 .isActive {
   border-bottom: solid black 2px;
+}
+
+.main__good, .main__all-goods {
+  overflow: visible !important;
 }

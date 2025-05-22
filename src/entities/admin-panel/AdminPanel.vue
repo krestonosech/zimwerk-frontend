@@ -2,7 +2,6 @@
   <div class="admin-panel">
     <div class="admin-panel__header">
       <Title text="Админ панель" />
-      <button @click="addingGood = true">Добавить товар</button>
       <button @click="onLogoutClick">Выйти</button>
     </div>
     <div style="display: flex; flex-direction: column; gap: 40px">
@@ -21,6 +20,7 @@
               <th><Text text="Услуга" /></th>
               <th><Text text="Товар" /></th>
               <th><Text text="Цена" /></th>
+              <th></th>
             </tr>
           </thead>
           <tr
@@ -31,6 +31,12 @@
             <td><Text :text="item.service" /></td>
             <td><Text :text="item.name || 'Услуга без товара'" /></td>
             <td><Text :text="`${item.price?.toString()} р.`" /></td>
+            <td>
+              <Text
+                :text="'Удалить товар'"
+                @click="deleteGood(item.id)"
+              />
+            </td>
           </tr>
         </table>
       </div>
@@ -51,6 +57,7 @@
               <th><Text text="Пользователь" /></th>
               <th><Text text="Услуга" /></th>
               <th><Text text="Номер" /></th>
+              <th></th>
             </tr>
           </thead>
           <tr
@@ -60,16 +67,30 @@
             <td><Text :text="item.username" /></td>
             <td><Text :text="item.service" /></td>
             <td><Text :text="item.phone.toString()" /></td>
+            <td>
+              <Text
+                :text="'Удалить услугу'"
+                @click="deleteRequest(item.id)"
+              />
+            </td>
           </tr>
         </table>
       </div>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 40px">
-      <Title
-        xs
-        text="Все товары"
-      />
+      <div style="display: flex; justify-content: space-between">
+        <Title
+          xs
+          text="Все товары"
+        />
+        <Title
+          xs
+          text="Добавить товар"
+          @click="addingGood = true"
+        />
+      </div>
+
       <div
         class="admin-panel__table"
         style="max-height: 500px; overflow-y: scroll"
@@ -185,6 +206,8 @@
   import { useReviewsStore } from '../reviews/model';
   import ModalAddingNews from '@/components/modals/modal-adding-news/ModalAddingNews.vue';
   import Star from '@/assets/icons/star.svg';
+  import { axios } from '@/plugins/axios';
+  import { showNotification } from '@/plugins/notifications';
 
   const reviewsStore = useReviewsStore();
   const userStore = useUserStore();
@@ -234,5 +257,49 @@
     userStore.user.username = '';
     userStore.user.phone = null;
     location.reload();
+  }
+
+  async function deleteGood(id: number) {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+
+      await axios.post('/delete-good', { id }, config);
+      showNotification({
+        text: 'Товар удален!',
+        type: 'success',
+      });
+      await goodsStore.fetchAllUsersGoods();
+    } catch {
+      showNotification({
+        text: 'Не удалось удались товар!',
+        type: 'error',
+      });
+    }
+  }
+
+  async function deleteRequest(id: number) {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      };
+
+      await axios.post('/delete-request', { id }, config);
+      showNotification({
+        text: 'Товар удален!',
+        type: 'success',
+      });
+      await goodsStore.fetchAllUsersAnotherGoods();
+    } catch {
+      showNotification({
+        text: 'Не удалось удались товар!',
+        type: 'error',
+      });
+    }
   }
 </script>

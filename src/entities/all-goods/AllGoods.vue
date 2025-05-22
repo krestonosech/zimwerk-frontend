@@ -1,19 +1,35 @@
 <template>
   <div class="main__all-goods">
-    <div style="display: flex; justify-content: space-between">
+    <div style="display: flex; justify-content: space-between; align-items: center; height: 56px">
       <Title
         text="Наши товары"
         black
         xs
       />
-      <Text
+      <div
         v-if="isShowCart"
-        text="Корзина"
-        black
-        xl
-        style="cursor: pointer"
+        style="
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          border: solid black 2px;
+          padding: 10px;
+          border-radius: 20px;
+          cursor: pointer;
+        "
         @click="showCart = true"
-      />
+      >
+        <img
+          :src="Cart"
+          alt="Иконка корзины"
+          style="width: 32px; height: 32px"
+        />
+        <Text
+          text="Корзина"
+          black
+          xl
+        />
+      </div>
     </div>
     <div class="main__all-goods-list">
       <button
@@ -29,15 +45,7 @@
         />
       </button>
     </div>
-    <div
-      style="
-        flex-wrap: wrap;
-        display: flex;
-        justify-content: space-between;
-        max-height: 760px;
-        overflow-y: auto;
-      "
-    >
+    <div style="flex-wrap: wrap; display: flex; gap: 20px; max-height: 760px; overflow-y: auto">
       <Goods
         v-for="item in goods"
         :key="item.id"
@@ -47,7 +55,12 @@
   </div>
   <ModalCart
     v-model:isModalShowCart="showCart"
-    @success="isModalAddingReviewsOpen = true"
+    @success="
+      () => {
+        if (userStore.user.isSendedReview) return;
+        isModalAddingReviewsOpen = true;
+      }
+    "
   />
   <ModalAddingReviews v-model:isModalAddingReviewsOpen="isModalAddingReviewsOpen" />
 </template>
@@ -58,7 +71,10 @@
   import { computed, onMounted, ref, watch } from 'vue';
   import Goods from './Goods.vue';
   import { useGoodsStore } from '../goods';
+  import Cart from '@/assets/icons/cart.svg';
+  import { useUserStore } from '../user';
 
+  const userStore = useUserStore();
   const goodsStore = useGoodsStore();
   const isShowCart = computed(() => goodsStore.selectedGoods.length);
   const goods = computed(() => goodsStore.goods.requests);

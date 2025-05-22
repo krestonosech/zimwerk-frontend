@@ -49,9 +49,9 @@
     required: true,
   });
   const emit = defineEmits(['close', 'success']);
-  const review = ref(0);
+  const review = ref(1);
   const description = ref('');
-  const hoveredRating = ref(0);
+  const hoveredRating = ref(1);
 
   function isStarActive(starNumber: number) {
     return starNumber <= (hoveredRating.value || review.value);

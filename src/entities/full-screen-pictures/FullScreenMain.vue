@@ -15,24 +15,47 @@
       </div>
       <Button
         fixed
-        @click="addRequest"
+        @click="clickButton"
       >
         Оформить заявку
       </Button>
     </div>
   </div>
+  <Modal
+    v-model:open="isModalOpen"
+    :apply-button="'Оформить'"
+    :title="'Подтверждение'"
+    @close="closeModal"
+    @apply="addRequest"
+  >
+    <Text
+      black
+      text="Вы уверены, что хотите оформить заявку?"
+    />
+  </Modal>
 </template>
 
 <script setup lang="ts">
-  import { Button, Title } from '@/components';
+  import { Button, Title, Modal } from '@/components';
   import './full-screen-pictures.scss';
-  import { defineEmits } from 'vue';
+  import { defineEmits, ref } from 'vue';
   import { useUserStore } from '../user';
   import { axios } from '@/plugins/axios';
   import { showNotification } from '@/plugins/notifications';
+  import Text from '@/components/Text.vue';
 
   const userStore = useUserStore();
   const emit = defineEmits(['scrollToSection']);
+  const isModalOpen = ref(false);
+
+  function closeModal() {
+    isModalOpen.value = false;
+  }
+
+  function clickButton() {
+    if (userStore.user.id) return (isModalOpen.value = true);
+    emit('scrollToSection', 'request');
+  }
 
   async function addRequest() {
     if (userStore.user.id) {
@@ -55,6 +78,7 @@
           text: 'Вы записались!',
           type: 'success',
         });
+        closeModal();
       } catch (error) {
         showNotification({
           text: 'Не удалось записаться!',
