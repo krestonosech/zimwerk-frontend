@@ -26,3 +26,33 @@
     }
   }
 }
+
+@media (max-width: 1440px) {
+  .main {
+    &__sixth {
+      width: 100vw;
+      background: linear-gradient(135deg, #162636 0%, #395a74 100%);
+
+      &--selected {
+        background-color: white;
+      }
+    }
+    &__sixth-element {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    &__sixth-text {
+      height: inherit;
+      &--element {
+        padding: 40px;
+      }
+    }
+    &__sixth-img {
+      padding: 40px 40px 40px 40px;
+      width: 300px;
+      height: 300px;
+    }
+  }
+}
+

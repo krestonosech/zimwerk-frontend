@@ -22,4 +22,19 @@
     justify-content: center;
     gap: 20px;
   }
+  &__ninth-text-privacy {
+    width: 620px; 
+    text-align: center
+  }
+}
+
+@media (max-width: 1440px) {
+  input {
+    width: 300px !important;
+  }
+  .main {
+    &__ninth-text-privacy {
+      width: 300px;
+    }
+  }
 }

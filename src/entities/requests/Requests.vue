@@ -8,151 +8,38 @@
     <div class="main__fifth-all">
       <div class="main__fifth-all-buttons">
         <div
+          v-for="(item, index) in buttons"
+          :key="index"
           class="main__fifth-buttons"
-          :class="{ 'main__fifth-buttons--active': selected !== 'Ремонт двигателя' }"
-          @click="selected = 'Ремонт двигателя'"
+          :class="{ 'main__fifth-buttons--active': selected !== item.text }"
+          @click="selected = item.text"
         >
           <img
-            :src="settings"
+            :src="item.icon"
             style="width: 24px; height: 24px"
-            :style="{ filter: selected === 'Ремонт двигателя' ? 'brightness(0) invert(1)' : '' }"
+            :style="{ filter: selected === item.text ? 'brightness(0) invert(1)' : '' }"
           />
           <Text
-            :black="selected !== 'Ремонт двигателя'"
+            :class="{ 'main__fifth-buttons--active-text': selected !== item.text }"
+            :black="selected !== item.text"
             hover
             xl
-            text="Ремонт двигателя"
-          />
-        </div>
-        <div
-          class="main__fifth-buttons"
-          :class="{ 'main__fifth-buttons--active': selected !== 'Ремонт подвески' }"
-          @click="selected = 'Ремонт подвески'"
-        >
-          <img
-            :src="spring"
-            style="width: 24px; height: 24px"
-            :style="{ filter: selected === 'Ремонт подвески' ? 'brightness(0) invert(1)' : '' }"
-          />
-          <Text
-            :black="selected !== 'Ремонт подвески'"
-            hover
-            xl
-            text="Ремонт подвески"
-          />
-        </div>
-        <div
-          class="main__fifth-buttons"
-          :class="{ 'main__fifth-buttons--active': selected !== 'Техобслуживание' }"
-          @click="selected = 'Техобслуживание'"
-        >
-          <img
-            :src="ink"
-            style="width: 24px; height: 24px"
-            :style="{ filter: selected === 'Техобслуживание' ? 'brightness(0) invert(1)' : '' }"
-          />
-          <Text
-            :black="selected !== 'Техобслуживание'"
-            hover
-            xl
-            text="Техобслуживание"
-          />
-        </div>
-        <div
-          class="main__fifth-buttons"
-          :class="{ 'main__fifth-buttons--active': selected !== 'Диагностика' }"
-          @click="selected = 'Диагностика'"
-        >
-          <img
-            :src="search"
-            style="width: 24px; height: 24px"
-            :style="{ filter: selected === 'Диагностика' ? 'brightness(0) invert(1)' : '' }"
-          />
-          <Text
-            :black="selected !== 'Диагностика'"
-            hover
-            xl
-            text="Диагностика"
+            :text="item.text"
           />
         </div>
       </div>
+
       <div
-        v-if="selected === 'Ремонт двигателя'"
+        v-for="(item, index) in filteredItems"
+        :key="index"
         class="main__fifth-text"
       >
         <div class="main__fifth-text--el">
-          <Text
-            text="Мы предлагаем полный комплекс услуг по диагностике и ремонту ДВС. Наш техцентр оснащен современным оборудованием, работы выполняют специалисты высокого уровня, квалифицированные в ремонте двигателей. Это позволяет нам гарантировать высокий стандарт качества диагностики и ремонта."
-          />
-          <Button
-            fixed
-            @click="addRequest"
-          >
-            Оформить заявку
-          </Button>
+          <Text :text="item.text" />
+          <Button @click="addRequest">Оформить заявку</Button>
         </div>
         <img
-          :src="engine"
-          class="main__fifth-img"
-        />
-      </div>
-      <div
-        v-if="selected === 'Ремонт подвески'"
-        class="main__fifth-text"
-      >
-        <div class="main__fifth-text--el">
-          <Text
-            text="В нашем сервисе мы проводим комплексную диагностику и ремонт подвески с использованием современного оборудования. Опытные мастера нашего сервиса используют стандарты производителя, оригинальные запчасти или проверенные аналоги высокого качества, тем самым гарантируя безопасность и надежность."
-          />
-          <Button
-            fixed
-            @click="addRequest"
-          >
-            Оформить заявку
-          </Button>
-        </div>
-        <img
-          :src="Spring"
-          class="main__fifth-img"
-        />
-      </div>
-      <div
-        v-if="selected === 'Техобслуживание'"
-        class="main__fifth-text"
-      >
-        <div class="main__fifth-text--el">
-          <Text
-            text="В нашем сервисном центре мы предлагаем профессиональное техобслуживание для всех моделей Volkswagen, Audi, Škoda и SEAT от 2009 г. Мы проводим полное техобслуживание, включая осмотр, замену масла и фильтров, проверку тормозной системы и подвески. Каждый процесс — от осмотра до обслуживания — тщательно контролируется."
-          />
-          <Button
-            fixed
-            @click="addRequest"
-          >
-            Оформить заявку
-          </Button>
-        </div>
-        <img
-          :src="instrumenti"
-          class="main__fifth-img"
-        />
-      </div>
-      <div
-        v-if="selected === 'Диагностика'"
-        class="main__fifth-text"
-      >
-        <div class="main__fifth-text--el">
-          <Text
-            text="Мы проводим высокоточную диагностику, чтобы выявить причины возникновения неисправностей и предложить оптимальные решения. Наши сотрудники диагностического центра - это высококвалифицированные специалисты с богатым опытом работы с автомобилями Volkswagen AG, хорошо знающие типичные проблемы конкретных моделей и способы их устранения."
-          />
-          <Button
-            fixed
-            @click="addRequest"
-          >
-            Оформить заявку
-          </Button>
-        </div>
-        <img
-          :src="diagnostic"
+          :src="item.image"
           class="main__fifth-img"
         />
       </div>
@@ -183,16 +70,45 @@
   import Spring from '@/assets/images/spring.png';
   import diagnostic from '@/assets/images/diagnostic.png';
   import { Button, Modal, ModalRegisterAuth, Text, Title } from '@/components';
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import './requests.scss';
   import { axios } from '@/plugins/axios';
   import { showNotification } from '@/plugins/notifications';
   import { useUserStore } from '../user';
 
+  const buttons = [
+    { text: 'Ремонт двигателя', icon: settings },
+    { text: 'Ремонт подвески', icon: spring },
+    { text: 'Техобслуживание', icon: ink },
+    { text: 'Диагностика', icon: search },
+  ];
+  const items = [
+    {
+      text: 'Мы предлагаем полный комплекс услуг по диагностике и ремонту ДВС. Наш техцентр оснащен современным оборудованием, работы выполняют специалисты высокого уровня, квалифицированные в ремонте двигателей. Это позволяет нам гарантировать высокий стандарт качества диагностики и ремонта.',
+      image: engine,
+      title: 'Ремонт двигателя',
+    },
+    {
+      text: 'В нашем сервисе мы проводим комплексную диагностику и ремонт подвески с использованием современного оборудования. Опытные мастера нашего сервиса используют стандарты производителя, оригинальные запчасти или проверенные аналоги высокого качества, тем самым гарантируя безопасность и надежность.',
+      image: Spring,
+      title: 'Ремонт подвески',
+    },
+    {
+      text: 'В нашем сервисном центре мы предлагаем профессиональное техобслуживание для всех моделей Volkswagen, Audi, Škoda и SEAT от 2009 г. Мы проводим полное техобслуживание, включая осмотр, замену масла и фильтров, проверку тормозной системы и подвески. Каждый процесс — от осмотра до обслуживания — тщательно контролируется.',
+      image: instrumenti,
+      title: 'Техобслуживание',
+    },
+    {
+      text: 'Мы проводим высокоточную диагностику, чтобы выявить причины возникновения неисправностей и предложить оптимальные решения. Наши сотрудники диагностического центра - это высококвалифицированные специалисты с богатым опытом работы с автомобилями Volkswagen AG, хорошо знающие типичные проблемы конкретных моделей и способы их устранения.',
+      image: diagnostic,
+      title: 'Диагностика',
+    },
+  ];
   const userStore = useUserStore();
   const selected = ref('Ремонт двигателя');
   const isRegisterOpen = ref(false);
   const isModalOpen = ref(false);
+  const filteredItems = computed(() => items.filter(item => item.title === selected.value));
 
   function closeModal() {
     isModalOpen.value = false;

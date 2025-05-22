@@ -51,4 +51,12 @@
       width: 1440px;
     }
   }
+
+  @media (max-width: 1440px) {
+    .main-layout {
+      &--style {
+        width: 100%;
+      }
+    }
+  }
 </style>

@@ -106,7 +106,10 @@
         </div>
 
         <div style="display: flex; gap: 10px">
-          <div
+          <a
+            href="https://vk.com/zimwerk_podcast"
+            target="_blank"
+            rel="noopener noreferrer"
             style="
               height: 40px;
               width: 40px;
@@ -117,14 +120,19 @@
               justify-content: center;
               cursor: pointer;
             "
+            aria-label="VK"
           >
             <img
               style="width: 20px; height: 20px; filter: brightness(0) invert(1)"
               :src="VK"
               alt="VK"
             />
-          </div>
-          <div
+          </a>
+
+          <a
+            href="https://t.me/s/vagcenterchannel"
+            target="_blank"
+            rel="noopener noreferrer"
             style="
               height: 40px;
               width: 40px;
@@ -135,15 +143,19 @@
               justify-content: center;
               cursor: pointer;
             "
+            aria-label="Telegram"
           >
             <img
               style="width: 20px; height: 20px; filter: brightness(0) invert(1)"
               :src="Telegram"
               alt="Telegram"
             />
-          </div>
+          </a>
 
-          <div
+          <a
+            href="https://www.youtube.com/@VAGCENTER"
+            target="_blank"
+            rel="noopener noreferrer"
             style="
               height: 40px;
               width: 40px;
@@ -154,13 +166,14 @@
               justify-content: center;
               cursor: pointer;
             "
+            aria-label="YouTube"
           >
             <img
               style="width: 20px; height: 20px; filter: brightness(0) invert(1)"
               :src="youtube"
-              alt="youtube"
+              alt="YouTube"
             />
-          </div>
+          </a>
         </div>
       </div>
     </div>

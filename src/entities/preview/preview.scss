@@ -31,3 +31,26 @@
     gap: 30px;
   }
 }
+
+@media (max-width: 1440px) {
+  .main {
+    &__second {
+      max-width: 700px;
+    }
+    &__third {
+      max-width: 700px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .main {
+    &__second {
+      max-width: 300px;
+    }
+    &__third {
+      max-width: 300px;
+    }
+  }
+}
+

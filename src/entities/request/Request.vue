@@ -22,14 +22,14 @@
           type="tel"
         />
         <Button
-          style="width: 520px"
           gray
           @click="addRequest"
         >
           Отправить заявку
         </Button>
         <Text
-          style="width: 620px; text-align: center"
+          style=""
+          class="main__ninth-text-privacy"
           black
           xs
           text="Отправляя заявку, я принимаю все условия Политики оператора в отношении обработки персональных данных и Пользовательского соглашения"

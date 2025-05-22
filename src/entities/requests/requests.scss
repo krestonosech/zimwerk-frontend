@@ -62,3 +62,48 @@
     height: 500px;
   }
 }
+
+@media (max-width: 1440px) {
+  .main {
+    &__fifth {
+      padding: 40px 0 0;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &__layout {
+        width: inherit;
+        flex-direction: column;
+        display: flex;
+        gap: 40px;
+        padding-bottom: 80px;
+      }
+    }
+    &__fifth-buttons {
+      width: 70%;
+      &--active {
+        width: 10%;
+      }
+      &--active-text {
+        display: none;
+      }
+    }
+    &__fifth-text {
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 20px;
+      padding: 40px 40px 0 40px ;
+      &--el {
+        width: 250px;
+        padding: 0  ;
+        padding-bottom: 40px;
+      }
+
+    }
+    &__fifth-img {
+      width: 250px;
+      height: 250px;
+    }
+  }
+}

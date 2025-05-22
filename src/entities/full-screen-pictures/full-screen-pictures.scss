@@ -81,3 +81,21 @@
     width: 700px;
   }
 }
+
+@media (max-width: 1440px) {
+  .main {
+    &__first--element {
+      width: 100%;
+      padding-left: 40px;
+    }
+    &__seventh-element {
+      width: 100%;
+    }
+    &__seventh-text {
+      width: 300px;
+    }
+    &__seventh-text-1 {
+      width: 300px;
+    }
+  }
+}

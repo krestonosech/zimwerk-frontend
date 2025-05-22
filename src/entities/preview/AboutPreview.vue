@@ -12,21 +12,42 @@
       />
     </div>
     <div class="main__third-icons">
-      <img
-        class="icon"
-        :src="Telegram"
-        alt="Telegram"
-      />
-      <img
-        class="icon"
-        :src="VK"
-        alt="VK"
-      />
-      <img
-        class="icon"
-        :src="youtube"
-        alt="youtube"
-      />
+      <a
+        href="https://t.me/s/vagcenterchannel"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Telegram канал"
+      >
+        <img
+          class="icon"
+          :src="Telegram"
+          alt="Telegram"
+        />
+      </a>
+      <a
+        href="https://vk.com/zimwerk_podcast"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="VK паблик"
+      >
+        <img
+          class="icon"
+          :src="VK"
+          alt="VK"
+        />
+      </a>
+      <a
+        href="https://www.youtube.com/@VAGCENTER"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="YouTube канал"
+      >
+        <img
+          class="icon"
+          :src="youtube"
+          alt="YouTube"
+        />
+      </a>
     </div>
   </div>
 </template>

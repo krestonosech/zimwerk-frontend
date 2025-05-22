@@ -45,7 +45,7 @@
         />
       </button>
     </div>
-    <div style="flex-wrap: wrap; display: flex; gap: 20px; max-height: 760px; overflow-y: auto">
+    <div class="main__all-goods-items">
       <Goods
         v-for="item in goods"
         :key="item.id"

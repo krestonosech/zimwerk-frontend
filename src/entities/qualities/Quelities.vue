@@ -3,75 +3,26 @@
     <div class="main__sixth-element">
       <img
         class="main__sixth-img"
-        :src="items[selected]"
+        :src="images[selected]"
       />
       <div class="main__sixth-text">
         <div
+          v-for="(item, index) in items"
+          :key="index"
           class="main__sixth-text--element"
-          :class="{ 'main__sixth--selected': selected === 'garant' }"
-          @mouseover="selected = 'garant'"
+          :class="{ 'main__sixth--selected': selected === item.title }"
+          @mouseover="selected = item.title"
         >
           <Text
             xl
-            text="Гарантия и качество"
+            :text="item.title"
             style="margin-bottom: 4px"
-            :black="selected === 'garant'"
+            :black="selected === item.title"
           />
           <Text
             xs
-            :black="selected === 'garant'"
-            text="Используем только оригинальные запчасти или аналоги высокого качества, И даем годовую гарантию на запчасти которые установлены в ваш автомобиль. Мы поддерживаем качество работы с Вами и Вашими автомобилями на всех уровнях работы"
-          />
-        </div>
-        <div
-          class="main__sixth-text--element"
-          :class="{ 'main__sixth--selected': selected === 'podhod' }"
-          @mouseover="selected = 'podhod'"
-        >
-          <Text
-            xl
-            text="Профессиональный подход"
-            :black="selected === 'podhod'"
-            style="margin-bottom: 3px"
-          />
-          <Text
-            xs
-            :black="selected === 'podhod'"
-            text="Большой арсенал специализированного оборудования и высокая культура производства отличают наш технический центр от среднего автосервиса"
-          />
-        </div>
-        <div
-          class="main__sixth-text--element"
-          :class="{ 'main__sixth--selected': selected === 'opit' }"
-          @mouseover="selected = 'opit'"
-        >
-          <Text
-            xl
-            text="Многолетний опыт"
-            :black="selected === 'opit'"
-            style="margin-bottom: 2px"
-          />
-          <Text
-            xs
-            :black="selected === 'opit'"
-            text="Наша команда состоит из сертифицированных мастеров с большим опытом работы именно с автомобилями Volkswagen Group. Они знают все нюансы и особенности каждой модели"
-          />
-        </div>
-        <div
-          class="main__sixth-text--element"
-          :class="{ 'main__sixth--selected': selected === 'loualnost' }"
-          @mouseover="selected = 'loualnost'"
-        >
-          <Text
-            xl
-            text="Лояльность"
-            :black="selected === 'loualnost'"
-            style="margin-bottom: 2px"
-          />
-          <Text
-            xs
-            :black="selected === 'loualnost'"
-            text="Мы ценим каждого клиента и стремимся построить долгосрочные отношения, основанные на доверии и взаимопонимании. С нами вы можете рассчитывать на индивидуальный подход и заботу о вашем автомобиле"
+            :black="selected === item.title"
+            :text="item.text"
           />
         </div>
       </div>
@@ -88,12 +39,31 @@
   import { ref } from 'vue';
   import './quelities.scss';
 
-  const items: Record<string, string> = {
-    garant: first,
-    podhod: second,
-    opit: third,
-    loualnost: fourth,
+  const images: Record<string, string> = {
+    'Гарантия и качество': first,
+    'Профессиональный подход': second,
+    'Многолетний опыт': third,
+    Лояльность: fourth,
   };
 
-  const selected = ref('garant');
+  const items = [
+    {
+      text: 'Используем только оригинальные запчасти или аналоги высокого качества, И даем годовую гарантию на запчасти которые установлены в ваш автомобиль. Мы поддерживаем качество работы с Вами и Вашими автомобилями на всех уровнях работы',
+      title: 'Гарантия и качество',
+    },
+    {
+      text: 'Большой арсенал специализированного оборудования и высокая культура производства отличают наш технический центр от среднего автосервиса',
+      title: 'Профессиональный подход',
+    },
+    {
+      text: 'Наша команда состоит из сертифицированных мастеров с большим опытом работы именно с автомобилями Volkswagen Group. Они знают все нюансы и особенности каждой модели',
+      title: 'Многолетний опыт',
+    },
+    {
+      text: 'Мы ценим каждого клиента и стремимся построить долгосрочные отношения, основанные на доверии и взаимопонимании. С нами вы можете рассчитывать на индивидуальный подход и заботу о вашем автомобиле',
+      title: 'Лояльность',
+    },
+  ];
+
+  const selected = ref('Гарантия и качество');
 </script>
