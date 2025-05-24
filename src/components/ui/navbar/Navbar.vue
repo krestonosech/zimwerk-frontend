@@ -13,7 +13,6 @@
 
       <div
         class="navbar__tabs"
-        :style="{ display: isBurgerOpen ? 'flex' : 'none' }"
         :class="{ 'navbar__tabs--open': isBurgerOpen }"
       >
         <button
