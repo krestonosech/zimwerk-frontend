@@ -24,10 +24,10 @@
     <Quelities />
     <FullScreenPictures1 />
     <FullScreenPictures2 />
-    <Request
+    <!-- <Request
       v-if="!username"
       id="request"
-    />
+    /> -->
     <div id="contacts">
       <Contacts />
     </div>
@@ -46,7 +46,6 @@
   import { Quelities } from '@/entities/qualities';
   import { Contacts } from '@/entities/contacts';
   import { AboutUs } from '@/entities/about-us';
-  import { Request } from '@/entities/request';
   import {
     FullScreenMain,
     FullScreenPictures1,
@@ -64,7 +63,6 @@
   import { AdminPanel } from '@/entities/admin-panel';
 
   const userStore = useUserStore();
-  const username = computed(() => userStore.user.username);
   const isAdmin = computed(() => userStore.user.isAdmin);
   const token = computed(() => localStorage.getItem('token'));
   const loading = ref(false);

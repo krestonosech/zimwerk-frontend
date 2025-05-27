@@ -14,6 +14,8 @@ export interface AnotherItem {
   username: string;
   service: string;
   phone: number;
+  time: string;
+  date: string;
 }
 
 export interface RequestsUsers extends Item {

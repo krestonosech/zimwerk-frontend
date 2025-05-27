@@ -13,12 +13,13 @@
           up
         />
       </div>
-      <Button
+      <!--       <Button
         fixed
         @click="clickButton"
       >
         Оформить заявку
-      </Button>
+      </Button> -->
+      <div></div>
     </div>
   </div>
   <Modal
@@ -36,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Button, Title, Modal } from '@/components';
+  import { Title, Modal } from '@/components';
   import './full-screen-pictures.scss';
   import { defineEmits, ref } from 'vue';
   import { useUserStore } from '../user';
@@ -52,10 +53,10 @@
     isModalOpen.value = false;
   }
 
-  function clickButton() {
+  /* function clickButton() {
     if (userStore.user.id) return (isModalOpen.value = true);
     emit('scrollToSection', 'request');
-  }
+  } */
 
   async function addRequest() {
     if (userStore.user.id) {

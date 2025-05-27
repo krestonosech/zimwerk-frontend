@@ -63,6 +63,23 @@
   }
 }
 
+select {
+  border-radius: 30px;
+  height: 71px;
+  padding: 0 40px;
+  border: solid white 2px !important;
+  border-bottom: solid black 1px !important;
+}
+select:focus {
+  border-bottom: solid black 1px !important;
+  border: solid black 2px !important;
+}
+select,
+option {
+  font-family: 'YourFont', sans-serif;
+  font-size: 18px;
+}
+
 @media (max-width: 1440px) {
   .main {
     &__fifth {

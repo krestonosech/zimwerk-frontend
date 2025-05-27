@@ -54,6 +54,8 @@
               <th><Text text="Услуга" /></th>
               <th><Text text="Номер" /></th>
               <th><Text text="Имя" /></th>
+              <th><Text text="Время" /></th>
+              <th><Text text="Дата" /></th>
               <th></th>
             </tr>
           </thead>
@@ -64,6 +66,8 @@
             <td><Text :text="item.service" /></td>
             <td><Text :text="item.phone.toString()" /></td>
             <td><Text :text="`${item.username}`" /></td>
+            <td><Text :text="item.time" /></td>
+            <td><Text :text="item.date" /></td>
             <td>
               <Text
                 :text="'Удалить услугу'"

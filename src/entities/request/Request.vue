@@ -70,6 +70,7 @@
   });
 
   async function addRequest() {
+    if (!username.value || (parsePhoneNumber(phoneInput.value?.value) ?? 0) < 1000000000) return;
     try {
       const config = {
         headers: {
