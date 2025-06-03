@@ -15,22 +15,24 @@
       <AllGoods />
       <div style="width: 1440px; padding-bottom: 40px">
         <Title
+          id="contacts"
           black
           xs
           text="Почему именно ZIMWERK?"
         />
       </div>
     </div>
-    <Quelities />
+    <div>
+      <Quelities />
+    </div>
+
     <FullScreenPictures1 />
     <FullScreenPictures2 />
     <!-- <Request
       v-if="!username"
       id="request"
     /> -->
-    <div id="contacts">
-      <Contacts />
-    </div>
+    <Contacts />
     <div id="about-us">
       <AboutUs />
     </div>

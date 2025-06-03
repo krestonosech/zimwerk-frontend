@@ -62,18 +62,25 @@
       :min-date="minDate"
       class="register__input"
     />
-    <select
+    <div
       v-if="availableSlots.length"
-      v-model="selectedTime"
+      class="time-slots-container"
     >
-      <option
+      <button
         v-for="time in availableSlots"
         :key="time"
-        :value="time"
+        class="time-slot-button"
+        :class="{ 'time-slot-button--active': selectedTime === time }"
+        @click="selectedTime = time"
       >
         {{ time }}
-      </option>
-    </select>
+      </button>
+    </div>
+    <Text
+      v-if="!availableSlots.length && aviableTime.length"
+      black
+      text="Нет доступных временных слотов для выбранной даты"
+    />
   </Modal>
   <ModalRegisterAuth v-model:is-register-open="isRegisterOpen" />
 </template>
@@ -227,6 +234,7 @@
     date.value = null;
     availableSlots.value = [];
     aviableTime.value = [];
+    selectedTime.value = '';
   }
 
   function formatDate(date: Date) {
@@ -333,3 +341,34 @@
     'декабря',
   ];
 </script>
+
+<style scoped>
+  .time-slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .time-slot-button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    color: black;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .time-slot-button:hover {
+    background-color: #f0f0f0;
+  }
+
+  .time-slot-button--active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+</style>

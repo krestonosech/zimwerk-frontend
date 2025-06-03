@@ -1,5 +1,8 @@
 <template>
-  <div class="navbar">
+  <div
+    class="navbar"
+    :class="{ 'navbar--hidden': !isNavbarVisible }"
+  >
     <div class="navbar__container">
       <button
         class="navbar__burger"
@@ -90,20 +93,20 @@
         <button
           class="navbar__tabs--elements"
           @click="
-            emit('scrollToSection', 'contacts');
-            closeBurger();
-          "
-        >
-          <Text text="Контакты" />
-        </button>
-        <button
-          class="navbar__tabs--elements"
-          @click="
             emit('scrollToSection', 'about-us');
             closeBurger();
           "
         >
           <Text text="О нас" />
+        </button>
+        <button
+          class="navbar__tabs--elements"
+          @click="
+            emit('scrollToSection', 'contacts');
+            closeBurger();
+          "
+        >
+          <Text text="Контакты" />
         </button>
       </div>
     </div>
@@ -113,7 +116,7 @@
 
 <script setup lang="ts">
   import { ModalRegisterAuth, Text } from '@/components';
-  import { computed, defineEmits, onMounted, ref } from 'vue';
+  import { computed, defineEmits, onMounted, ref, onUnmounted } from 'vue';
   import './navbar.scss';
   import { useUserStore } from '@/entities/user';
   import { router } from '@/router';
@@ -125,10 +128,37 @@
   const username = computed(() => userStore.user.username);
   const isDropdownOpen = ref(false);
   const isBurgerOpen = ref(false);
+  const isNavbarVisible = ref(true);
+  const lastScrollPosition = ref(0);
+  const scrollThreshold = 100;
 
   onMounted(async () => {
     if (token.value) userStore.profileMe();
+    window.addEventListener('scroll', onScroll);
   });
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', onScroll);
+  });
+
+  function onScroll() {
+    const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (Math.abs(currentScrollPosition - lastScrollPosition.value) < 30) return;
+
+    if (
+      currentScrollPosition < lastScrollPosition.value ||
+      currentScrollPosition < scrollThreshold ||
+      isBurgerOpen.value ||
+      window.innerWidth <= 768
+    ) {
+      isNavbarVisible.value = true;
+    } else {
+      isNavbarVisible.value = false;
+    }
+
+    lastScrollPosition.value = currentScrollPosition;
+  }
 
   function onLogoutClick() {
     localStorage.removeItem('token');
