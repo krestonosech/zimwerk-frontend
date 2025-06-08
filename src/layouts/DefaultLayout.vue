@@ -46,7 +46,7 @@
     align-items: center;
     overflow-x: hidden;
     justify-content: center;
-    background-color: rgb(0, 0, 29);
+    background: linear-gradient(to top, #2639fa, #000b53);
     &--style {
       width: 1440px;
     }

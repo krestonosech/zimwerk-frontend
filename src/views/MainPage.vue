@@ -5,8 +5,21 @@
   >
     <Navbar @scroll-to-section="(item: string) => scrollToSection(item)" />
     <FullScreenMain @scroll-to-section="(item: string) => scrollToSection(item)" />
-    <Preview />
-    <AboutPreview />
+    <div
+      style="
+        width: 100vw;
+        background-color: rgb(0, 0, 29);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div style="max-width: 1440px">
+        <Preview />
+        <AboutPreview />
+      </div>
+    </div>
     <Cars id="cars" />
     <div class="main__fifth">
       <div id="requests">

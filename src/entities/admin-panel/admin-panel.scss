@@ -54,3 +54,9 @@ button {
   word-break: break-word;
   overflow-wrap: anywhere;
 }
+@media (max-width: 1440px) {
+  .table-width {
+    overflow-x: scroll;
+    min-width: 700px;
+  }
+}

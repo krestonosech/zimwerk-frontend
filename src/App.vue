@@ -3,7 +3,20 @@
 </template>
 
 <script lang="ts" setup>
+  import { watch } from 'vue';
   import { DefaultLayout } from './layouts';
+
+  watch(
+    () => localStorage.getItem('token'),
+    () => {
+      const firstRunKey = 'projectFirstRunDone';
+      if (!localStorage.getItem(firstRunKey)) {
+        localStorage.removeItem('token');
+        localStorage.setItem(firstRunKey, 'true');
+      }
+    },
+    { deep: true, immediate: true }
+  );
 </script>
 
 <style lang="scss">

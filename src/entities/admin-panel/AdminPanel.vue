@@ -13,7 +13,7 @@
         class="admin-panel__table"
         style="max-height: 500px; overflow-y: scroll"
       >
-        <table>
+        <table class="table-width">
           <thead>
             <tr>
               <th><Text text="Пользователь" /></th>
@@ -51,7 +51,7 @@
         class="admin-panel__table"
         style="max-height: 500px; overflow-y: scroll"
       >
-        <table>
+        <table class="table-width">
           <thead>
             <tr>
               <th><Text text="Пользователь" /></th>
@@ -99,7 +99,7 @@
         class="admin-panel__table"
         style="max-height: 500px; overflow-y: scroll"
       >
-        <table>
+        <table class="table-width">
           <thead>
             <tr>
               <th><Text text="Название" /></th>
